@@ -1,7 +1,7 @@
 # Личный проект «YetiCave»
 
 * Студент: [Иван Бедный](https://up.htmlacademy.ru/php/6/user/238584).
-* Наставник: [Олег Головахин].
+* Наставник: [Олег Головахин](https://htmlacademy.ru/profile/id849005).
 
 ---
 
