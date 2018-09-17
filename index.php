@@ -3,6 +3,10 @@ $is_auth = rand(0, 1);
 
 $user_name = ''; // укажите здесь ваше имя
 $user_avatar = 'img/user.jpg';
+
+function ruble_display ($number) {
+		return number_format ( ceil ($number), $decimals = 0 , $dec_point = "." , $thousands_sep = " " ) . ' ' . '₽';
+}
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -78,7 +82,8 @@ $user_avatar = 'img/user.jpg';
                     <div class="lot__state">
                         <div class="lot__rate">
                             <span class="lot__amount">Стартовая цена</span>
-                            <span class="lot__cost">цена<b class="rub">р</b></span>
+							<?php $number = 55987.75;?>
+                            <span class="lot__cost"><?=ruble_display($number)?> <b class="rub">р</b></span>
                         </div>
                         <div class="lot__timer timer">
 
