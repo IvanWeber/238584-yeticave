@@ -6,7 +6,7 @@ $user_avatar = 'img/user.jpg';
 
 
 function ruble_display ($number) {
-		return number_format ( ceil ($number), 0 , "." , " " ) . ' ' . '₽';
+		return number_format ( ceil ($number), 0 , "." , " " ) . ' ₽';
 }
 
 $categories = [
