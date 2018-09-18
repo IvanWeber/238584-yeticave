@@ -4,6 +4,11 @@ $is_auth = rand(0, 1);
 $user_name = ''; // укажите здесь ваше имя
 $user_avatar = 'img/user.jpg';
 
+
+function ruble_display ($number) {
+		return number_format ( ceil ($number), 0 , "." , " " ) . ' ₽';
+}
+
 $categories = [
 					"Доски и лыжи", "Крепления", "Ботинки",
 					"Одежда", "Инструменты", "Разное"];
@@ -44,7 +49,7 @@ $categories = [
 						'price' => "5400",
 						'url' => "img/lot-6.jpg"
 					]
-				];				
+				];
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -123,7 +128,7 @@ $categories = [
                     <div class="lot__state">
                         <div class="lot__rate">
                             <span class="lot__amount">Стартовая цена</span>
-                            <span class="lot__cost"><?=$val['price']?><b class="rub">р</b></span>
+                            <span class="lot__cost"><?=ruble_display($val['price'])?> </span>
                         </div>
                         <div class="lot__timer timer">
 
