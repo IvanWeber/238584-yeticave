@@ -3,6 +3,48 @@ $is_auth = rand(0, 1);
 
 $user_name = ''; // укажите здесь ваше имя
 $user_avatar = 'img/user.jpg';
+
+$categories = [
+					"Доски и лыжи", "Крепления", "Ботинки",
+					"Одежда", "Инструменты", "Разное"];
+				$adverts = [
+					 [
+						'name' => "2014 Rossignol District Snowboard",
+						'category' => "Доски и лыжи",
+						'price' => 10999,
+						'url' => "img/lot-1.jpg"
+					],	
+					 [
+						'name' => "DC Ply Mens 2016/2017 Snowboard",
+						'category' => "Доски и лыжи",
+						'price' => 159999,
+						'url' => "img/lot-2.jpg"
+					],	
+					[
+						'name' => "Крепления Union Contact Pro 2015 года размер L/XL",
+						'category' => "Крепления",
+						'price' => 8000,
+						'url' => "img/lot-3.jpg"
+					],	
+					 [
+						'name' => "Ботинки для сноуборда DC Mutiny Charocal" ,
+						'category' => "Ботинки",
+						'price' => 10999,
+						'url' => "img/lot-4.jpg"
+					],	
+					 [
+						'name' => "Куртка для сноуборда DC Mutiny Charocal",
+						'category' => "Одежда",
+						'price' => 7500,
+						'url' => "img/lot-5.jpg"
+					],	
+					[
+						'name' => "Маска Oakley Canopy",
+						'category' => "Разное",
+						'price' => "5400",
+						'url' => "img/lot-6.jpg"
+					]
+				];				
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -55,57 +97,13 @@ $user_avatar = 'img/user.jpg';
     <section class="promo">
         <h2 class="promo__title">Нужен стафф для катки?</h2>
         <p class="promo__text">На нашем интернет-аукционе ты найдёшь самое эксклюзивное сноубордическое и горнолыжное снаряжение.</p>
-		<?php 	$categories = [
-					"Доски и лыжи", "Крепления", "Ботинки",
-					"Одежда", "Инструменты", "Разное"];
-				$adverts = [
-					$advert1 = [
-						'name' => "2014 Rossignol District Snowboard",
-						'category' => "Доски и лыжи",
-						'price' => 10999,
-						'url' => "img/lot-1.jpg"
-					],	
-					$advert2 = [
-						'name' => "DC Ply Mens 2016/2017 Snowboard",
-						'category' => "Доски и лыжи",
-						'price' => 159999,
-						'url' => "img/lot-2.jpg"
-					],	
-					$advert3 = [
-						'name' => "Крепления Union Contact Pro 2015 года размер L/XL",
-						'category' => "Крепления",
-						'price' => 8000,
-						'url' => "img/lot-3.jpg"
-					],	
-					$advert4 = [
-						'name' => "Ботинки для сноуборда DC Mutiny Charocal" ,
-						'category' => "Ботинки",
-						'price' => 10999,
-						'url' => "img/lot-4.jpg"
-					],	
-					$advert5 = [
-						'name' => "Куртка для сноуборда DC Mutiny Charocal",
-						'category' => "Одежда",
-						'price' => 7500,
-						'url' => "img/lot-5.jpg"
-					],	
-					$advert6 = [
-						'name' => "Маска Oakley Canopy",
-						'category' => "Разное",
-						'price' => "5400",
-						'url' => "img/lot-6.jpg"
-					]
-				];				
-				$categories_count = 5;
-				$cur_category= 0;?>
         <ul class="promo__list">
             <!--заполните этот список из массива категорий-->
-			<?php while ($cur_category <= $categories_count): ?>
+			<?php foreach ($categories as $key => $val): ?>
             <li class="promo__item promo__item--boards">
-                <a class="promo__link" href="pages/all-lots.html"><?=$categories[$cur_category];?></a>
+                <a class="promo__link" href="pages/all-lots.html"><?=$categories[$key];?></a>
             </li>
-			<?php $cur_category++; ?>
-			<?php endwhile; ?>
+			<?php endforeach; ?>
         </ul>
     </section>
     <section class="lots">
@@ -141,15 +139,13 @@ $user_avatar = 'img/user.jpg';
 
 <footer class="main-footer">
     <nav class="nav">
-		<?php $cur_category = 0; ?>
         <ul class="nav__list container">
             <!--заполните этот список из массива категорий-->
-		<?php while ($cur_category <= $categories_count): ?>
+		<?php foreach ($categories as $key => $val): ?>
             <li class="nav__item">
-                <a href="pages/all-lots.html"><?=$categories[$cur_category];?></a>
+                <a href="pages/all-lots.html"><?=$categories[$key];?></a>
             </li>
-		<?php $cur_category++; ?>
-		<?php endwhile; ?>
+		<?php endforeach; ?>
         </ul>
     </nav>
     <div class="main-footer__bottom container">
