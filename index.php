@@ -82,8 +82,7 @@ function ruble_display ($number) {
                     <div class="lot__state">
                         <div class="lot__rate">
                             <span class="lot__amount">Стартовая цена</span>
-							<?php $number = 55987.75;?>
-                            <span class="lot__cost"><?=ruble_display($number)?> <b class="rub">р</b></span>
+                            <span class="lot__cost"><?=ruble_display(55987.75)?> <b class="rub">р</b></span>
                         </div>
                         <div class="lot__timer timer">
 
