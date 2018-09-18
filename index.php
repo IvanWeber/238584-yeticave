@@ -5,7 +5,7 @@ $user_name = ''; // укажите здесь ваше имя
 $user_avatar = 'img/user.jpg';
 
 function ruble_display ($number) {
-		return number_format ( ceil ($number), $decimals = 0 , $dec_point = "." , $thousands_sep = " " ) . ' ' . '₽';
+		return number_format ( ceil ($number), 0 , "." , " " ) . ' ' . '₽';
 }
 ?>
 <!DOCTYPE html>
@@ -82,7 +82,7 @@ function ruble_display ($number) {
                     <div class="lot__state">
                         <div class="lot__rate">
                             <span class="lot__amount">Стартовая цена</span>
-                            <span class="lot__cost"><?=ruble_display(55987.75)?> <b class="rub">р</b></span>
+                            <span class="lot__cost"><?=ruble_display(55986.75)?> <b class="rub">р</b></span>
                         </div>
                         <div class="lot__timer timer">
 
