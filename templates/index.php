@@ -1,8 +1,4 @@
-<?php
-function ruble_display ($number) {
-return number_format ( ceil ($number), 0 , "." , " " ) . ' ₽';
-}
-?>
+
 
 <section class="promo">
     <h2 class="promo__title">Нужен стафф для катки?</h2>

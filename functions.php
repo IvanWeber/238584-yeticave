@@ -15,4 +15,9 @@ $result = ob_get_clean();
 
 return $result;
 }
+
+function ruble_display ($number) {
+return number_format ( ceil ($number), 0 , "." , " " ) . ' ₽';
+}
+
 ?>
