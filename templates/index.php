@@ -32,7 +32,7 @@
                             <span class="lot__cost"><?=ruble_display(htmlspecialchars($val['price']))?> </span>
                         </div>
                         <div class="lot__timer timer">
-
+                        <?= $time_left ?>
                         </div>
                     </div>
                 </div>

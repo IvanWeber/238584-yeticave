@@ -56,3 +56,8 @@ $adverts = [
         'url' => "img/lot-6.jpg"
     ]
 ];
+
+date_default_timezone_set("Europe/Moscow");
+$tomorrow_midnight = strtotime ('tomorrow');
+$time_left = gmdate ("H:i", $tomorrow_midnight - time());
+
