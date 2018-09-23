@@ -12,7 +12,7 @@ CREATE TABLE lot (
 	creation_date  DATE,
 	name CHAR(128),
 	discription CHAR(255),
-	image BLOB,
+	image CHAR(128),
 	start_price MEDIUMINT,
 	end_date DATE,
 	rate_step SMALLINT
@@ -30,9 +30,11 @@ CREATE TABLE users (
 	email CHAR(128),
 	name CHAR(128),
 	password CHAR(64),
-	avatar BLOB,
+	avatar CHAR(128),
 	contacts CHAR(255)
 );
+
+USE Yeticave;
 
 	
 	
