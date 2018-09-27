@@ -12,13 +12,13 @@ INSERT INTO users (id, name) VALUES
 (3, 'Евгений'),
 (4, 'Семён');
 
-INSERT INTO lots (id, name, category_id, start_price, image, creation_date, bet_step, price) VALUES
-(1, '2014 Rossignol District Snowboard', 1, 10999, 'img/lot-1.jpg', '18.09.21', (SELECT COUNT(*) FROM bets WHERE lot_id=1), (SELECT sum FROM bets)),
-(2, 'DC Ply Mens 2016/2017 Snowboard', 1, 159999, 'img/lot-2.jpg', '18.09.22', (SELECT COUNT(*) FROM bets WHERE lot_id=2), (SELECT sum FROM bets)),
-(3, 'Крепления Union Contact Pro 2015 года размер L/XL', 2, 8000, 'img/lot-3.jpg', '18.09.24', (SELECT COUNT(*) FROM bets WHERE lot_id=3), (SELECT sum FROM bets)),
-(4, 'Ботинки для сноуборда DC Mutiny Charocal', 3, 10999, 'img/lot-4.jpg', '18.09.25', (SELECT COUNT(*) FROM bets WHERE lot_id=4), (SELECT sum FROM bets)),
-(5, 'Куртка для сноуборда DC Mutiny Charocal', 4, 7500, 'img/lot-5.jpg', '18.09.26', (SELECT COUNT(*) FROM bets WHERE lot_id=5), (SELECT sum FROM bets)),
-(6, 'Маска Oakley Canopy', 6, 5400, 'img/lot-6.jpg', '18.09.27', (SELECT COUNT(*) FROM bets WHERE lot_id=6), (SELECT sum FROM bets));
+INSERT INTO lots (id, name, category_id, start_price, image, creation_date, bet_step) VALUES
+(1, '2014 Rossignol District Snowboard', 1, 10999, 'img/lot-1.jpg', '18.09.21', (SELECT COUNT(*) FROM bets WHERE lot_id=1)),
+(2, 'DC Ply Mens 2016/2017 Snowboard', 1, 159999, 'img/lot-2.jpg', '18.09.22', (SELECT COUNT(*) FROM bets WHERE lot_id=2)),
+(3, 'Крепления Union Contact Pro 2015 года размер L/XL', 2, 8000, 'img/lot-3.jpg', '18.09.24', (SELECT COUNT(*) FROM bets WHERE lot_id=3)),
+(4, 'Ботинки для сноуборда DC Mutiny Charocal', 3, 10999, 'img/lot-4.jpg', '18.09.25', (SELECT COUNT(*) FROM bets WHERE lot_id=4)),
+(5, 'Куртка для сноуборда DC Mutiny Charocal', 4, 7500, 'img/lot-5.jpg', '18.09.26', (SELECT COUNT(*) FROM bets WHERE lot_id=5)),
+(6, 'Маска Oakley Canopy', 6, 5400, 'img/lot-6.jpg', '18.09.27', (SELECT COUNT(*) FROM bets WHERE lot_id=6));
 
 UPDATE lots SET end_date='18.09.23' WHERE id=1;
 
@@ -49,7 +49,7 @@ UPDATE lots SET `price`=(SELECT sum FROM bets WHERE lot_id=6 AND id=(SELECT MAX(
 SELECT name FROM categories; 
 
 /*получить самые новые, открытые лоты. Каждый лот должен включать название, стартовую цену, ссылку на изображение, цену, количество ставок, название категории;*/
-SELECT name, start_price, image, price, bet_step, (SELECT name FROM categories WHERE id=category_id) FROM lots WHERE end_date is NULL ORDER BY creation_date ASC;
+SELECT name, start_price, image, price, bet_step, creation_date, (SELECT name FROM categories WHERE id=category_id) FROM lots WHERE end_date is NULL ORDER BY creation_date ASC;
 
 /*показать лот по его id. Получить также название категории, к которой принадлежит лот*/
 SELECT name, (SELECT name FROM categories WHERE id=category_id) FROM lots WHERE id=3;
