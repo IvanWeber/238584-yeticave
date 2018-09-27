@@ -52,7 +52,7 @@ $adverts = [
     [
         'name' => "Маска Oakley Canopy",
         'category' => "Разное",
-        'price' => "5400",
+        'price' => 5400,
         'url' => "img/lot-6.jpg"
     ]
 ];
