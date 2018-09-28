@@ -41,7 +41,7 @@ CREATE TABLE lots (
 CREATE TABLE bets (
 	id INT AUTO_INCREMENT PRIMARY KEY,
 	date DATE,
-	sum MEDIUMINT,
+	price MEDIUMINT,
 	user_id INT,
 	lot_id INT,
 	FOREIGN KEY (user_id) REFERENCES users(id),
