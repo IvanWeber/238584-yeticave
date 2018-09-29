@@ -1,6 +1,6 @@
 CREATE DATABASE Yeticave
-	DEFAULT CHARACTER SET utf8
-	DEFAULT COLLATE utf8_general_ci;
+	DEFAULT CHARACTER SET utf8mb4
+	DEFAULT COLLATE utf8mb4_general_ci;
 	
 	
 USE Yeticave;
@@ -28,19 +28,20 @@ CREATE TABLE lots (
 	image CHAR(128),
 	start_price MEDIUMINT,
 	end_date DATE,
-	rate_step SMALLINT,
-	categories_id INT,
+	bet_step SMALLINT,
+	category_id INT,
 	user_id INT,
 	winner_id INT,
-	FOREIGN KEY (categories_id) REFERENCES categories(id),
+	price MEDIUMINT,
+	FOREIGN KEY (category_id) REFERENCES categories(id),
 	FOREIGN KEY (user_id) REFERENCES users(id),
 	FOREIGN KEY (winner_id) REFERENCES users(id)
 );
 
-CREATE TABLE rate (
+CREATE TABLE bets (
 	id INT AUTO_INCREMENT PRIMARY KEY,
 	date DATE,
-	sum MEDIUMINT,
+	price MEDIUMINT,
 	user_id INT,
 	lot_id INT,
 	FOREIGN KEY (user_id) REFERENCES users(id),
@@ -48,6 +49,4 @@ CREATE TABLE rate (
 );
 
 
-
-	
 	
