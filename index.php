@@ -41,5 +41,5 @@ $layout_content = include_template('layout.php', ['page_name' => $page_name, 'is
     'page_content' => $page_content ]);
 
 print ($layout_content);
-
+print_r($categories_query_array);
 
