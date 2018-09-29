@@ -17,6 +17,7 @@ $newlots_result=mysqli_query($con, $newlots_query);
 if(!$newlots_result) {
     $error = mysqli_error($con);
     print("Ошибка MySQL: " . $error);
+    die();
 }
 
 $newlots_query_array=mysqli_fetch_all($newlots_result, MYSQLI_ASSOC);
@@ -28,16 +29,15 @@ $categories_result=mysqli_query($con, $categories_query);
 if(!$categories_result) {
     $error = mysqli_error($con);
     print("Ошибка MySQL: " . $error);
+    die();
 }
 
-$categories_query_array=mysqli_fetch_all($categories_result);
+$categories_query_array=mysqli_fetch_all($categories_result, MYSQLI_ASSOC);
 
-$categories_query_array_indexed=array_map('current', $categories_query_array);
-
-$page_content = include_template('index.php', ['categories' => $categories_query_array_indexed, 'adverts' => $newlots_query_array, 'time_left' =>
+$page_content = include_template('index.php', ['categories' => $categories_query_array, 'adverts' => $newlots_query_array, 'time_left' =>
 $time_left]);
 $layout_content = include_template('layout.php', ['page_name' => $page_name, 'is_auth' => $is_auth,
-    'user_name' => $user_name, 'user_avatar' => $user_avatar, 'categories' => $categories_query_array_indexed,
+    'user_name' => $user_name, 'user_avatar' => $user_avatar, 'categories' => $categories_query_array,
     'page_content' => $page_content ]);
 
 print ($layout_content);
