@@ -5,7 +5,7 @@ $con = mysqli_connect("localhost", "root", "PasswordforMySQL","Yeticave");
 
 mysqli_set_charset($con, "utf8");
 
-$newlots_query="SELECT lots.name, lots.start_price AS price, lots.image AS url, MAX(bets.price) AS price_now, 
+$newlots_query="SELECT lots.id AS lot_id, lots.name, lots.start_price AS price, lots.image AS url, MAX(bets.price) AS price_now, 
 COUNT(bets.price) AS bets_numbers, creation_date, categories.name AS category
 FROM lots 
 INNER JOIN bets ON lots.id=bets.lot_id 
@@ -41,5 +41,4 @@ $layout_content = include_template('layout.php', ['page_name' => $page_name, 'is
     'page_content' => $page_content ]);
 
 print ($layout_content);
-print_r($categories_query_array);
 
