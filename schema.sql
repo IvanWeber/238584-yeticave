@@ -24,7 +24,7 @@ CREATE TABLE lots (
 	id INT AUTO_INCREMENT PRIMARY KEY,
 	creation_date  DATE,
 	name CHAR(128),
-	discription CHAR(255),
+	description TEXT,
 	image CHAR(128),
 	start_price MEDIUMINT,
 	end_date DATE,
