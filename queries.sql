@@ -25,7 +25,7 @@ INSERT INTO lots (id, name, category_id, start_price, image, creation_date, bet_
 
 UPDATE lots SET end_date='18.09.23' WHERE id=1;
 
-UPDATE lots SET end_date='19.09.24' WHERE id=2;
+UPDATE lots SET end_date='18.09.24' WHERE id=2;
 
 INSERT INTO bets (id, user_id, price, lot_id, date) VALUE
 (1, 1, 11499, 1, '18.09.23'),
