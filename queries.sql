@@ -12,25 +12,29 @@ INSERT INTO users (id, name, email, registration_date, password) VALUES
 (3, 'Евгений', 'evgenyy@mail.ru', '18.08.25', 'evgenyypass'),
 (4, 'Семён', 'semyon@yahoo.com', '18.09.05', 'semyonpass');
 
-INSERT INTO lots (id, name, category_id, start_price, image, creation_date, bet_step) VALUES
-(1, '2014 Rossignol District Snowboard', 1, 10999, 'img/lot-1.jpg', '18.09.21', 500),
-(2, 'DC Ply Mens 2016/2017 Snowboard', 1, 159999, 'img/lot-2.jpg', '18.09.22', 5000),
-(3, 'Крепления Union Contact Pro 2015 года размер L/XL', 2, 8000, 'img/lot-3.jpg', '18.09.24', 500),
-(4, 'Ботинки для сноуборда DC Mutiny Charocal', 3, 10999, 'img/lot-4.jpg', '18.09.25', 500),
-(5, 'Куртка для сноуборда DC Mutiny Charocal', 4, 7500, 'img/lot-5.jpg', '18.09.26', 500),
-(6, 'Маска Oakley Canopy', 6, 5400, 'img/lot-6.jpg', '18.09.27', 100);
+INSERT INTO lots (id, name, category_id, start_price, image, creation_date, bet_step, description) VALUES
+(1, '2014 Rossignol District Snowboard', 1, 10999, 'img/lot-1.jpg', '18.09.21', 500, 'Недорогой и качественный сноуборд от компании Rossignol'),
+(2, 'DC Ply Mens 2016/2017 Snowboard', 1, 159999, 'img/lot-2.jpg', '18.09.22', 5000, 'Легкий маневренный сноуборд, готовый дать жару в любом парке, растопив снег 
+мощным щелчкоми четкими дугами. Стекловолокно Bi-Ax, уложенное в двух направлениях, наделяет этот снаряд отличной гибкостью и отзывчивостью, а симметричная
+ геометрия в сочетании с классическим прогибом кэмбер позволит уверенно держать высокие скорости. А если к концу катального дня сил совсем не останется, 
+ просто посмотрите на Вашу доску и улыбнитесь, крутая графика от Шона Кливера еще никого не оставляла равнодушным.'),
+(3, 'Крепления Union Contact Pro 2015 года размер L/XL', 2, 8000, 'img/lot-3.jpg', '18.09.24', 500, 'Крепления для сноуборда компании Union Contact Pro'),
+(4, 'Ботинки для сноуборда DC Mutiny Charocal', 3, 10999, 'img/lot-4.jpg', '18.09.25', 500, 'Ботинки для сноуборда компании DC Mutiny Charocal'),
+(5, 'Куртка для сноуборда DC Mutiny Charocal', 4, 7500, 'img/lot-5.jpg', '18.09.26', 500, 'Куртка для сноуборда компании DC Mutiny Charocal'),
+(6, 'Маска Oakley Canopy', 6, 5400, 'img/lot-6.jpg', '18.09.27', 100, 'Сноубордическая маска компании Oakley Canopy');
 
 UPDATE lots SET end_date='18.09.23' WHERE id=1;
 
-UPDATE lots SET end_date='19.09.24' WHERE id=2;
+UPDATE lots SET end_date='18.09.24' WHERE id=2;
 
 INSERT INTO bets (id, user_id, price, lot_id, date) VALUE
-(1, 1, 11499, 4, '18.09.25'),
-(2, 2, 11000, 3, '18.09.25'),
-(3, 3, 10500, 5, '18.09.26'),
-(4, 4, 5700, 6, '18.09.27'),
-(5, 3, 11500, 3, '18.09.26'),
-(6, 2, 11999, 4, '18.09.27');
+(1, 1, 11499, 1, '18.09.23'),
+(2, 1, 164999, 2, '18.09.24'),
+(3, 1, 11499, 4, '18.09.25'),
+(4, 2, 11000, 3, '18.09.25'),
+(5, 3, 10500, 5, '18.09.26'),
+(6, 3, 11500, 3, '18.09.26'),
+(7, 2, 11999, 4, '18.09.27');
 
 
 /*получить все категории;*/
@@ -39,14 +43,14 @@ SELECT name FROM categories;
 /*получить самые новые, открытые лоты. Каждый лот должен включать название, стартовую цену, ссылку на изображение, цену, количество ставок, название категории;*/
 SELECT lots.name, lots.start_price, lots.image, MAX(bets.price) AS price, COUNT(bets.price) AS bets_numbers, creation_date, categories.name
 FROM lots 
-INNER JOIN bets ON lots.id=bets.lot_id 
-INNER JOIN categories ON lots.category_id=categories.id WHERE end_date is NULL GROUP BY lots.name ORDER BY creation_date DESC;
+JOIN bets ON lots.id=bets.lot_id 
+JOIN categories ON lots.category_id=categories.id WHERE end_date is NULL GROUP BY lots.name ORDER BY creation_date DESC;
 
 
 /*показать лот по его id. Получить также название категории, к которой принадлежит лот*/
 SELECT lots.name, categories.name
 FROM lots
-INNER JOIN categories ON lots.category_id=categories.id WHERE lots.id=3;
+JOIN categories ON lots.category_id=categories.id WHERE lots.id=3;
 
 /*обновить название лота по его идентификатору;*/
 UPDATE lots SET name='2015 Rossignol District Snowboard' WHERE id=1;
