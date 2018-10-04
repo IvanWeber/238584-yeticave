@@ -8,8 +8,8 @@ mysqli_set_charset($con, "utf8");
 $newlots_query="SELECT lots.id AS lot_id, lots.name, lots.start_price AS price, lots.image AS url, MAX(bets.price) AS price_now, 
 COUNT(bets.price) AS bets_numbers, creation_date, categories.name AS category
 FROM lots 
-INNER JOIN bets ON lots.id=bets.lot_id 
-INNER JOIN categories ON lots.category_id=categories.id WHERE end_date is NULL GROUP BY lots.name 
+LEFT OUTER JOIN bets ON lots.id=bets.lot_id 
+JOIN categories ON lots.category_id=categories.id WHERE end_date is NULL GROUP BY lots.name 
 ORDER BY creation_date DESC;";
 
 $newlots_result=mysqli_query($con, $newlots_query);

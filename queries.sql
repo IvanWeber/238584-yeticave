@@ -33,9 +33,8 @@ INSERT INTO bets (id, user_id, price, lot_id, date) VALUE
 (3, 1, 11499, 4, '18.09.25'),
 (4, 2, 11000, 3, '18.09.25'),
 (5, 3, 10500, 5, '18.09.26'),
-(6, 4, 5700, 6, '18.09.27'),
-(7, 3, 11500, 3, '18.09.26'),
-(8, 2, 11999, 4, '18.09.27');
+(6, 3, 11500, 3, '18.09.26'),
+(7, 2, 11999, 4, '18.09.27');
 
 
 /*получить все категории;*/
@@ -44,14 +43,14 @@ SELECT name FROM categories;
 /*получить самые новые, открытые лоты. Каждый лот должен включать название, стартовую цену, ссылку на изображение, цену, количество ставок, название категории;*/
 SELECT lots.name, lots.start_price, lots.image, MAX(bets.price) AS price, COUNT(bets.price) AS bets_numbers, creation_date, categories.name
 FROM lots 
-INNER JOIN bets ON lots.id=bets.lot_id 
-INNER JOIN categories ON lots.category_id=categories.id WHERE end_date is NULL GROUP BY lots.name ORDER BY creation_date DESC;
+JOIN bets ON lots.id=bets.lot_id 
+JOIN categories ON lots.category_id=categories.id WHERE end_date is NULL GROUP BY lots.name ORDER BY creation_date DESC;
 
 
 /*показать лот по его id. Получить также название категории, к которой принадлежит лот*/
 SELECT lots.name, categories.name
 FROM lots
-INNER JOIN categories ON lots.category_id=categories.id WHERE lots.id=3;
+JOIN categories ON lots.category_id=categories.id WHERE lots.id=3;
 
 /*обновить название лота по его идентификатору;*/
 UPDATE lots SET name='2015 Rossignol District Snowboard' WHERE id=1;

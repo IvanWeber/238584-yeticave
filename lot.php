@@ -16,12 +16,13 @@ if(!$lots_id_result) {
 
 $lots_id_query_array=mysqli_fetch_all($lots_id_result, MYSQLI_ASSOC);
 
-$lots_related_query="SELECT lots.id AS lot_id, lots.name, lots.start_price AS price, lots.image AS url, MAX(bets.price) AS price_now, 
+$lots_related_query="SELECT lots.id AS lot_id, lots.name, lots.start_price, lots.image AS url, MAX(bets.price) AS last_bet_price, 
 COUNT(bets.price) AS bets_numbers, creation_date, categories.name AS category, end_date
 FROM lots 
-INNER JOIN bets ON lots.id=bets.lot_id 
-INNER JOIN categories ON lots.category_id=categories.id WHERE lot_id='".(int)$_GET['lot_id']."' GROUP BY lots.name 
+LEFT OUTER JOIN bets ON lots.id=bets.lot_id 
+JOIN categories ON lots.category_id=categories.id WHERE lots.id='".(int)$_GET['lot_id']."' GROUP BY lots.name 
 ORDER BY creation_date DESC;";
+
 
 $lots_related_result=mysqli_query($con, $lots_related_query);
 

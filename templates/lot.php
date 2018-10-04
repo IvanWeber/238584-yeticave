@@ -45,15 +45,31 @@
                     Текущая цена
                     <?php endif; ?>
                 </span>
-                <span class="lot-item__cost"><?=ruble_display($lots_related[0]['price_now'])?></span>
+                <span class="lot-item__cost">
+                    <?php if(isset($lots_related[0]['last_bet_price'])): ?>
+                    <?=ruble_display($lots_related[0]['last_bet_price'])?>
+                  <?php else: ?>
+                  <?=ruble_display($lots_related[0]['start_price'])?>
+                    <?php endif; ?>
+                </span>
               </div>
               <div class="lot-item__min-cost">
-                  <?php if (!isset($lots_related[0]['end_date'])):?>
+                  <?php if (isset($lots_related[0]['last_bet_price'])): ?>
+                         <?php if (!isset($lots_related[0]['end_date'])):?>
                 Мин. ставка
-                  <span><?=ruble_display($lots_related[0]['price_now']+$lot[0]['bet_step'])?></span>
-                  <?php else: ?>
+                  <span><?=ruble_display($lots_related[0]['last_bet_price']+$lot[0]['bet_step'])?></span>
+                         <?php else: ?>
                       <span>Лот закрыт <?=$lots_related[0]['end_date']?></span>
+                         <?php endif;?>
+                  <?php else: ?>
+                         <?php if (!isset($lots_related[0]['end_date'])):?>
+                  Мин. ставка
+                  <span><?=ruble_display($lots_related[0]['start_price']+$lot[0]['bet_step'])?></span>
+                         <?php else: ?>
+                  <span>Лот закрыт <?=$lots_related[0]['end_date']?></span>
+                         <?php endif;?>
                   <?php endif;?>
+
               </div>
             </div>
               <!--
