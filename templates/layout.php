@@ -6,6 +6,7 @@
     <title><?= $page_name; ?></title>
     <link href="css/normalize.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+    <link rel="shortcut icon" href="img/yetiicon.png" type="image/png">
 </head>
 <body>
 <div class="page-wrapper">
