@@ -1,4 +1,4 @@
-
+<main>
     <nav class="nav">
       <ul class="nav__list container">
         <li class="nav__item">
@@ -142,3 +142,4 @@
         </div>
       </div>
     </section>
+</main>
