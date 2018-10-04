@@ -57,7 +57,8 @@ else {
 
 $page_name=$lots_id_query_array[0]['name'];
 
-$page_content=include_template('lot.php', ['lot'=>$lots_id_query_array, 'lots_related'=>$lots_related_query_array ]);
+$page_content=include_template('lot.php', ['lot'=>$lots_id_query_array, 'lots_related'=>$lots_related_query_array,
+    'time_left'=>$time_left]);
 $layout_content = include_template('layout.php', ['page_name'=>$page_name, 'is_auth' => $is_auth,
     'user_name' => $user_name, 'user_avatar' => $user_avatar, 'categories' => $categories_query_array,
     'page_content' => $page_content ]);
