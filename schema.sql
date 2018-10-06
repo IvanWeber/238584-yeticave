@@ -22,12 +22,12 @@ CREATE TABLE users (
 
 CREATE TABLE lots (
 	id INT AUTO_INCREMENT PRIMARY KEY,
-	creation_date  DATE,
+	creation_date_time  DATETIME,
 	name CHAR(128),
 	description TEXT,
 	image CHAR(128),
 	start_price MEDIUMINT,
-	end_date DATE,
+	end_date_time DATETIME,
 	bet_step SMALLINT,
 	category_id INT,
 	user_id INT,

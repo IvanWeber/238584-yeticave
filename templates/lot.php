@@ -26,7 +26,7 @@
       <div class="lot-item__content">
         <div class="lot-item__left">
           <div class="lot-item__image">
-            <img src="img/lot-<?=$lot[0]['id']?>.jpg" width="730" height="548" alt="Сноуборд">
+            <img src="<?=$lot[0]['image']?>" width="730" height="548" alt="Сноуборд">
           </div>
           <p class="lot-item__category">Категория: <span><?=$lots_related[0]['category']?></span></p>
           <p class="lot-item__description"><?=$lot[0]['description']?></p>
@@ -34,12 +34,12 @@
         <div class="lot-item__right">
           <div class="lot-item__state">
             <div class="lot-item__timer timer">
-                <?=$time_left?>
+                <?php echo $interval->format('%mм. %dд. %hч. %iм.');?>
             </div>
             <div class="lot-item__cost-state">
               <div class="lot-item__rate">
                 <span class="lot-item__amount">
-                    <?php if (isset($lots_related[0]['end_date'])):?>
+                    <?php if (isset($lots_related[0]['end_date_time'])):?>
                     Конечная цена
                     <?php else: ?>
                     Текущая цена
