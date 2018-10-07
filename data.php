@@ -58,9 +58,6 @@ $adverts = [
 ];
 
 date_default_timezone_set("Europe/Moscow");
-$tomorrow_midnight = strtotime ('tomorrow');
-$time_left = gmdate ("H:i", $tomorrow_midnight - time());
-
 
 /* Формирование массивов с данными результатов SQL-запросов */
 $con = mysqli_connect("localhost", "root", "PasswordforMySQL","Yeticave");

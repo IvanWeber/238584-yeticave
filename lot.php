@@ -45,12 +45,13 @@ else {
 $page_name=$lots_id_query_array[0]['name'];
 
 /*Вычисление оставшегося времени до закрытия торгов по лоту*/
-$datetime1 = date_create($lots_id_query_array[0]['end_date_time']);
-$datetime2 = date_create(date('Y-n-d h:i:s', time()));
-$interval = date_diff($datetime2, $datetime1);
+$strdatetime = strtotime($lots_id_query_array[0]['end_date_time']);
+$time_left = $strdatetime - time();
+
+
 
 $page_content=include_template('lot.php', ['lot'=>$lots_id_query_array, 'lots_related'=>$lots_related_query_array,
-    'time_left'=>$time_left, 'interval'=>$interval]);
+    'time_left'=>$time_left]);
 $layout_content = include_template('layout.php', ['page_name'=>$page_name, 'is_auth' => $is_auth,
     'user_name' => $user_name, 'user_avatar' => $user_avatar, 'categories' => $categories_query_array,
     'page_content' => $page_content ]);
