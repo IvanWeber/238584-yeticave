@@ -4,41 +4,28 @@ require_once('data.php');
 
     $page_name = 'Yeti add';
     $required_fields = ['lot-name', 'category', 'description', 'lot-rate', 'lot-step', 'lot-date'];
-    $errors = [];
-    $form_invalid = '';
+    $form_invalid = false;
+
     /*Валидация для формы и полей*/
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         foreach ($required_fields as $field) {
             if (empty($_POST[$field])) {
-                $errors[$field] = ' (Поле не заполнено)';
-                $field_invalid[$field] = 'form__item--invalid';
+                $field_invalid[$field] = true;
             } else {
-                $errors[$field] = '';
-                $field_invalid[$field] = '';
+                $field_invalid[$field] = false;
             }
-            if ($field_invalid[$field] == 'form__item--invalid') {
-                $form_invalid = 'form--invalid';
+            if ($field_invalid[$field] == true) {
+                $form_invalid = true;
             }
         }
-        if (count($errors)) {
-            print('Ошибка валидации');
-        }
-    } else {
-        foreach ($required_fields as $field) {
-            $errors[$field] = '';
-            $field_invalid[$field] = '';
-        }
-        $form_invalid = '';
     }
 
     /*Валидация для поля выбора категории*/
     if ($_SERVER['REQUEST_METHOD'] == 'POST' and $_POST['category'] == 'Выберите категорию') {
-        $errors['category'] = 'Поле не заполнено';
-        $field_invalid['category'] = 'form__item--invalid';
-        $form_invalid = 'form--invalid';
+        $field_invalid['category'] = true;
+        $form_invalid = true;
     } else {
-        $errors['category'] = '';
-        $field_invalid['category'] = '';
+        $field_invalid['category'] = false;
     }
 
     /*'lot-name', 'category', 'description', 'lot-rate', 'lot-step', 'lot-date'*/
@@ -111,7 +98,7 @@ VALUES ('".$_POST['lot-name']."', '".$_POST['lot-rate']."', '".$_POST['lot-date'
     print_r($add_lot_related_query_array);
     print_r($add_lot_related_query_array[0]['category_id']);}
 
-    $page_content = include_template('add.php', ['categories' => $categories_query_array, 'errors' => $errors, 'field_invalid' => $field_invalid, 'form_invalid' => $form_invalid, 'filled_field_array' => $filled_field_array]);
+    $page_content = include_template('add.php', ['categories' => $categories_query_array, 'field_invalid' => $field_invalid, 'form_invalid' => $form_invalid, 'filled_field_array' => $filled_field_array]);
     $layout_content = include_template('layout.php', ['page_name' => $page_name, 'is_auth' => $is_auth,
         'user_name' => $user_name, 'user_avatar' => $user_avatar, 'categories' => $categories_query_array,
         'page_content' => $page_content]);
