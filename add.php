@@ -54,9 +54,8 @@ $lots_query_array=mysqli_fetch_all($lots_query_result, MYSQLI_ASSOC);
 /*Сценарий выполнится, если все поля заполнены верно*/
 if ($form_invalid=='' and $_SERVER['REQUEST_METHOD'] == 'POST') {
 
-    $con = mysqli_connect("localhost", "root", "PasswordforMySQL","Yeticave");
-    mysqli_set_charset($con, "utf8");
-/*
+
+
     $name = $_POST['lot-name'];
     $start_price = $_POST['lot-rate'];
     $end_date_time = $_POST['lot-date'];
@@ -72,16 +71,7 @@ VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
     mysqli_stmt_error();
     mysqli_stmt_bind_param($stmt,'ssssssss',$name,$start_price, $end_date_time, $bet_step, $description,
         $image,  $category_id, $creation_date_time);
-    mysqli_stmt_execute($stmt);*/
-
-    $add_lot_query="INSERT INTO lots (name, start_price, end_date_time, bet_step, description, image, category_id, creation_date_time) 
-VALUES ('".$_POST['lot-name']."', '".$_POST['lot-rate']."', '".$_POST['lot-date']."', '".$_POST['lot-step']."', '".$_POST['description']."', '".$file_url."', '".$_POST['category']."', '".date('Y-m-d H:i:s')."')";
-    $add_lot_query_result=mysqli_query($con, $add_lot_query);
-	if(! $add_lot_query_result) {
-    $error = mysqli_error($con);
-    print("Ошибка MySQL: " . $error);
-    die();
-	}
+    mysqli_stmt_execute($stmt);
 
     $add_lot_related_query="SELECT * FROM lots WHERE lots.id=(SELECT MAX(lots.id) FROM lots);";
     $add_lot__related_query_result=mysqli_query($con, $add_lot_related_query);
