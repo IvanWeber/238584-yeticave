@@ -5,7 +5,7 @@ require_once('data.php');
     $page_name = 'Yeti add';
     $required_fields = ['lot-name', 'category', 'description', 'lot-rate', 'lot-step', 'lot-date'];
     $form_invalid = false;
-
+    $category_check = false;
     /*Валидация для формы и полей*/
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         foreach ($required_fields as $field) {
@@ -21,15 +21,21 @@ require_once('data.php');
     }
 
     /*Валидация для поля выбора категории*/
-    if ($_SERVER['REQUEST_METHOD'] == 'POST' and $_POST['category'] == 'Выберите категорию') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+    foreach ($categories_query_array as $key => $val){
+        if ($val['id']==$_POST['category']) {
+            $category_check=true;
+        }
+    }
+}
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' and !$category_check) {
         $field_invalid['category'] = true;
         $form_invalid = true;
     } else {
         $field_invalid['category'] = false;
     }
 
-    /*'lot-name', 'category', 'description', 'lot-rate', 'lot-step', 'lot-date'*/
-
+    /*Запомнить введенные в форму данные*/
     foreach ($required_fields as $field) {
         $filled_field_array[$field] = $_POST[$field] ?? '';
     }
@@ -42,21 +48,21 @@ require_once('data.php');
 	
 	$lots_query="SELECT * FROM lots";
 
-$lots_query_result=mysqli_query($con, $lots_query);
+    $lots_query_result=mysqli_query($con, $lots_query);
 
-if(!$lots_query_result) {
+    if(!$lots_query_result) {
     $error = mysqli_error($con);
     print("Ошибка MySQL: " . $error);
     die();
-}
+    }
 
-$lots_query_array=mysqli_fetch_all($lots_query_result, MYSQLI_ASSOC);
-/*Сценарий выполнится, если все поля заполнены верно*/
-if ($form_invalid=='' and $_SERVER['REQUEST_METHOD'] == 'POST') {
+    $lots_query_array=mysqli_fetch_all($lots_query_result, MYSQLI_ASSOC);
 
 
+    /*Сценарий выполнится, если все поля заполнены верно*/
+    if ($form_invalid==false and $_SERVER['REQUEST_METHOD'] == 'POST') {
 
-    $name = $_POST['lot-name'];
+        $name = $_POST['lot-name'];
     $start_price = $_POST['lot-rate'];
     $end_date_time = $_POST['lot-date'];
     $bet_step = $_POST['lot-step'];
@@ -66,14 +72,13 @@ if ($form_invalid=='' and $_SERVER['REQUEST_METHOD'] == 'POST') {
     $creation_date_time = date('Y-m-d H:i:s');
 
     $add_lot_query='INSERT INTO lots (name, start_price, end_date_time, bet_step, description, image, category_id, creation_date_time)
-VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
     $stmt = mysqli_prepare($con, $add_lot_query);
-    mysqli_stmt_error();
+
     mysqli_stmt_bind_param($stmt,'ssssssss',$name,$start_price, $end_date_time, $bet_step, $description,
         $image,  $category_id, $creation_date_time);
-    mysqli_stmt_execute($stmt);
-
-    $add_lot_related_query="SELECT * FROM lots WHERE lots.id=(SELECT MAX(lots.id) FROM lots);";
+        mysqli_stmt_execute($stmt);
+        $add_lot_related_query="SELECT MAX(lots.id) AS id FROM lots;";
     $add_lot__related_query_result=mysqli_query($con, $add_lot_related_query);
     if(! $add_lot__related_query_result) {
         $error = mysqli_error($con);
@@ -81,12 +86,9 @@ VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
         die();}
     $add_lot_related_query_array=mysqli_fetch_all($add_lot__related_query_result, MYSQLI_ASSOC);
 
-    header("Location: lot.php?lot_id=" . $add_lot_related_query_array[0]['id']);
+    header("Location: lot.php?lot_id=" . $add_lot_related_query_array[0][id]);
     die();
-    print_r($_POST);
-    print_r($_POST['category']);
-    print_r($add_lot_related_query_array);
-    print_r($add_lot_related_query_array[0]['category_id']);}
+    }
 
     $page_content = include_template('add.php', ['categories' => $categories_query_array, 'field_invalid' => $field_invalid, 'form_invalid' => $form_invalid, 'filled_field_array' => $filled_field_array]);
     $layout_content = include_template('layout.php', ['page_name' => $page_name, 'is_auth' => $is_auth,
