@@ -42,9 +42,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     /*Формирование ссылки на загруженное изображение*/
     if (isset($_FILES['lot-photo'])) {
-        $file_name = $_FILES['lot-photo']['name'];
-        $file_path = 'img/';
-        $file_url = $file_path . $file_name;}
+        $file_name = basename(uniqid() . $_FILES['lot-photo']['name']);
+        $file_path = 'uploads/';
+        $file_url = $file_path . $file_name;
+        $tmp_name = $_FILES["lot-photo"]["tmp_name"];
+        move_uploaded_file($tmp_name, $file_url);}
+
+
 	
 	$lots_query="SELECT * FROM lots";
 
