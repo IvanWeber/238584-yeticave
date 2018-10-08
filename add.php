@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     /*Формирование ссылки на загруженное изображение*/
     if (isset($_FILES['lot-photo'])) {
-        $file_name = basename(uniqid() . $_FILES['lot-photo']['name']);
+        $file_name = uniqid() . $_FILES['lot-photo']['name'];
         $file_path = 'uploads/';
         $file_url = $file_path . $file_name;
         $tmp_name = $_FILES["lot-photo"]["tmp_name"];
