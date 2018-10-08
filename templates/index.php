@@ -32,7 +32,7 @@
                             <span class="lot__cost"><?=ruble_display(htmlspecialchars($val['price']))?> </span>
                         </div>
                         <div class="lot__timer timer">
-                        <?= $time_left ?>
+                        <?= timestamp_format(strtotime($val['end_date_time'])-time()) ?>
                         </div>
                     </div>
                 </div>

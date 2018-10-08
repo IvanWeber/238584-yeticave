@@ -10,7 +10,7 @@ $is_auth = rand(0, 1);
 
 $user_name = 'Иван'; // укажите здесь ваше имя
 $user_avatar = 'img/user.jpg';
-$page_name = 'Yeticave';
+
 
 
 
@@ -58,6 +58,23 @@ $adverts = [
 ];
 
 date_default_timezone_set("Europe/Moscow");
-$tomorrow_midnight = strtotime ('tomorrow');
-$time_left = gmdate ("H:i", $tomorrow_midnight - time());
+
+/* Формирование массивов с данными результатов SQL-запросов */
+$con = mysqli_connect("localhost", "root", "PasswordforMySQL","Yeticave");
+
+mysqli_set_charset($con, "utf8");
+
+$categories_query="SELECT id, name FROM categories GROUP BY name;";
+
+$categories_result=mysqli_query($con, $categories_query);
+
+if(!$categories_result) {
+    $error = mysqli_error($con);
+    print("Ошибка MySQL: " . $error);
+    die();
+}
+
+$categories_query_array=mysqli_fetch_all($categories_result, MYSQLI_ASSOC);
+
+
 
