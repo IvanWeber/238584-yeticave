@@ -6,7 +6,7 @@ $bets = [
     ['name' => 'Евгений', 'price' => 10500, 'ts' => strtotime('-' . rand(25, 50) .' hour')],
     ['name' => 'Семён', 'price' => 10000, 'ts' => strtotime('last week')]
 ];
-$is_auth = rand(0, 1);
+$is_auth = 0;
 
 $user_name = 'Иван'; // укажите здесь ваше имя
 $user_avatar = 'img/user.jpg';
