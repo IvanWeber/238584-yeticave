@@ -39,7 +39,7 @@ $login_query_array=mysqli_fetch_all($login_query_result, MYSQLI_ASSOC);
 
 	if ($_SERVER['REQUEST_METHOD'] == 'POST' and $form_invalid==false) {
 		foreach ($login_query_array as $key => $val) {
-			if($val['email']==$_POST['email'] and $val['password']==$_POST['password']) {
+			if($val['email']==$_POST['email'] and password_verify($_POST['password'], $val['password'])) {
 				$is_auth=true;
 				header("Location: index.php");
 				die();

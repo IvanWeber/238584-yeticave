@@ -56,7 +56,7 @@ $email_valid = true;
 		/*Сценарий выполнится, если валидация прошла успешно*/
 		if ($form_invalid==false and $email_valid==true and $_SERVER['REQUEST_METHOD'] == 'POST') {
 	$email = $_POST['email'];
-    $password = $_POST['password'];
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $name = $_POST['name'];
     $message = $_POST['message'];
 	$avatar = $file_url;
