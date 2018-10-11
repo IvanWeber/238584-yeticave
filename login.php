@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $page_content = include_template('login.php', ['form' => $form, 'errors' => $errors]);
     }
     else {
-        header("Location: /yeticave/login.php");
+        header("Location: /");
         exit();
     }
 }
@@ -51,9 +51,8 @@ else {
     }
 }
 
-$layout_content = include_template('layout.php', [
-    'page_content'   => $page_content,'is_auth' => $is_auth, 'user_name' => $user_name, 'user_avatar' => $user_avatar,
-    'categories' => $categories_query_array, 'username' => $_SESSION['user']['name']]);
+$layout_content = include_template('layout.php', ['page_content'   => $page_content,'is_auth' => $is_auth,
+    'user_name' => $user_name, 'user_avatar' => $user_avatar, 'categories' => $categories_query_array]);
 
 
 print($layout_content);

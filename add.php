@@ -2,6 +2,7 @@
 session_start();
 if (!isset($_SESSION['user'])){
     print('Ошибка 403');
+    http_response_code(403);
     die();
 }
 require_once('functions.php');

@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (isset($_SESSION['user'])){
-    print('Ошибка 403');
+    header("Location: /");
     die();
 }
 require_once('functions.php');
