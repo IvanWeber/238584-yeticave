@@ -18,8 +18,6 @@ $email_valid = true;
         foreach ($required_fields as $field) {
             if (empty($_POST[$field])) {
                 $field_invalid[$field] = true;
-            } else {
-                $field_invalid[$field] = false;
             }
             if ($field_invalid[$field] == true) {
                 $form_invalid = true;

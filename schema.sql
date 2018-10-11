@@ -40,7 +40,7 @@ CREATE TABLE lots (
 
 CREATE TABLE bets (
 	id INT AUTO_INCREMENT PRIMARY KEY,
-	date DATE,
+	date DATETIME,
 	price MEDIUMINT,
 	user_id INT,
 	lot_id INT,
