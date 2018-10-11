@@ -1,4 +1,9 @@
 <?php
+session_start();
+if (isset($_SESSION['user'])){
+    print('Ошибка 403');
+    die();
+}
 require_once('functions.php');
 require_once('data.php');
 
