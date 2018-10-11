@@ -20,7 +20,7 @@ return $result;
 
 /*Функция для отображения цены в рублях*/
 function ruble_display ($number) {
-    print(number_format ( ceil ($number), 0 , "." , " " ) . ' ₽');
+    return number_format ( ceil ($number), 0 , "." , " " ) . ' ₽';
 }
 
 function timestamp_format ($timestamp) {
@@ -31,7 +31,7 @@ function timestamp_format ($timestamp) {
     $minutes=floor($remain_time/60);
     $remain_time=$remain_time - $minutes*60;
     $seconds=$remain_time;
-    print($days . 'д. ' . $hours . 'ч. ' . $minutes . 'м. ' . $seconds . 'с.');
+  return $days . 'д. ' . $hours . 'ч. ' . $minutes . 'м. ' . $seconds . 'с.';
 }
 
 function timestamp_format_hours($timestamp) {
@@ -40,7 +40,7 @@ function timestamp_format_hours($timestamp) {
     $minutes=floor($remain_time/60);
     $remain_time=$remain_time - $minutes*60;
     $seconds=$remain_time;
-    print($hours . ':' . $minutes . ':' . $seconds . ':');
+   return $hours . ':' . $minutes . ':' . $seconds . ':';
 }
 
 
