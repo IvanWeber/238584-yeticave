@@ -12,8 +12,6 @@ $page_error= 1;
 $cur_page = $_GET['page'] ?? 1;
 $page_items = 9;
 
-
-
 $pag_sql = "SELECT COUNT(*) AS cnt
     FROM lots 
     JOIN categories ON lots.category_id=categories.id 

@@ -35,44 +35,7 @@ function timestamp_format ($timestamp) {
   return $days . 'д. ' . $hours . 'ч. ' . $minutes . 'м. ' . $seconds . 'с.';
 }
 
-/**
- * Создает подготовленное выражение на основе готового SQL запроса и переданных данных.
- *
- * @param mysqli $link Ресурс соединения
- * @param string $sql  SQL запрос с плейсхолдерами вместо значений
- * @param array  $data Данные для вставки на место плейсхолдеров
- *
- * @throws \UnexpectedValueException Если тип параметра не поддерживается
- *
- * @return mysqli_stmt Подготовленное выражение
- */
-$link = mysqli_connect("localhost", "root", "PasswordforMySQL","Yeticave");
 
-mysqli_set_charset($link, "utf8");
-function db_get_prepare_stmt($link, $sql, array $data = [])
-{
-    $stmt = mysqli_prepare($link, $sql);
-    if (empty($data)) {
-        return $stmt;
-    }
-    static $allowed_types = [
-        'integer' => 'i',
-        'double' => 'd',
-        'string' => 's',
-    ];
-    $types = '';
-    $stmt_data = [];
-    foreach ($data as $value) {
-        $type = gettype($value);
-        if (!isset($allowed_types[$type])) {
-            throw new \UnexpectedValueException(sprintf('Unexpected parameter type "%s".', $type));
-        }
-        $types .= $allowed_types[$type];
-        $stmt_data[] = $value;
-    }
-    mysqli_stmt_bind_param($stmt, $types, ...$stmt_data);
-    return $stmt;
-}
 
 
 
