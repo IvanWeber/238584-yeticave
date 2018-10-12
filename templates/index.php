@@ -28,8 +28,13 @@
                     <h3 class="lot__title"><a class="text-link" href="lot.php?lot_id=<?=$val['lot_id']?>"><?=htmlspecialchars($val['name'])?></a></h3>
                     <div class="lot__state">
                         <div class="lot__rate">
-                            <span class="lot__amount">Стартовая цена</span>
-                            <span class="lot__cost"><?=ruble_display(htmlspecialchars($val['price']))?> </span>
+                            <?php if (isset ($val['bet_id'])): ?>
+                                <span class="lot__amount"><?=$val['bets_num']?> ставок</span>
+                                <span class="lot__cost"><?=ruble_display(htmlspecialchars($val['price']))?> </span>
+                            <?php else: ?>
+                                <span class="lot__amount">Стартовая цена</span>
+                                <span class="lot__cost"><?=ruble_display(htmlspecialchars($val['start_price']))?> </span>
+                            <?php endif; ?>
                         </div>
                         <div class="lot__timer timer">
                         <?= timestamp_format(strtotime($val['end_date_time'])-time()) ?>

@@ -80,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 $bet_query='SELECT users.name AS name, bets.price AS price, bets.date AS date FROM bets 
 JOIN lots ON lots.id=bets.lot_id
 JOIN users ON users.id=bets.user_id
-WHERE lot_id="'.$_GET['lot_id'].'"
+WHERE lot_id="'.(int)$_GET['lot_id'].'"
 ORDER BY date DESC;';
 $bet_query_result=mysqli_query($con, $bet_query);
 if(!$bet_query_result) {

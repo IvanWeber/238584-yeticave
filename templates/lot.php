@@ -79,7 +79,7 @@
                 <td class="history__name"><?=$val['name']?></td>
                 <td class="history__price"><?=ruble_display($val['price']);?></td>
                 <td class="history__time"><?php if((time()- strtotime($val['date']))>86400) {$val['date'];}
-                else {timestamp_format(time()- strtotime($val['date'])); print(' назад');}?></td>
+                else {print(timestamp_format(time()- strtotime($val['date']))); print(' назад');}?></td>
               </tr>
                 <?php if($key==9) {break;}?>
                 <?php endforeach; ?>

@@ -66,7 +66,7 @@ $email_valid = true;
 	$registration_date = date('Y-m-d H:i:s');
     $add_user_query='INSERT INTO users (email, password, name, contacts, registration_date, avatar) VALUES (?, ?, ?, ?, ?, ?)';
 	$stmt = mysqli_prepare($con, $add_user_query);
-    mysqli_stmt_error();
+    mysqli_stmt_error($stmt);
     mysqli_stmt_bind_param($stmt,'ssssss',$email, $password, $name, $message, $registration_date, $avatar);
     mysqli_stmt_execute($stmt);
 
