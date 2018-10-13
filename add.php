@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         }
     }
 }
-    if ($_SERVER['REQUEST_METHOD'] == 'POST' and !$category_check) {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && !$category_check) {
         $field_invalid['category'] = true;
         $form_invalid = true;
     } else {
@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 
     /*Сценарий выполнится, если все поля заполнены верно*/
-    if ($form_invalid==false and $_SERVER['REQUEST_METHOD'] == 'POST') {
+    if ($form_invalid==false && $_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $name = $_POST['lot-name'];
     $start_price = $_POST['lot-rate'];

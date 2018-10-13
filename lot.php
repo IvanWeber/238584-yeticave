@@ -59,7 +59,7 @@ else {
 }
 
 $error_add_bet=false;
-if ($_SERVER['REQUEST_METHOD'] == 'POST' and $_POST['cost']>=$min_bet and $_POST['cost']%$lots_id_query_array[0]['bet_step']==0){
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['cost']>=$min_bet && $_POST['cost']%$lots_id_query_array[0]['bet_step']==0){
     $email=mysqli_real_escape_string($con, $_SESSION['user']['email']);
     $cost=$_POST['cost'];
     $lot_id=$_GET['lot_id'];

@@ -57,7 +57,7 @@ $email_valid = true;
         move_uploaded_file($tmp_name, $file_url);}
 		
 		/*Сценарий выполнится, если валидация прошла успешно*/
-		if ($form_invalid==false and $email_valid==true and $_SERVER['REQUEST_METHOD'] == 'POST') {
+		if ($form_invalid==false && $email_valid==true && $_SERVER['REQUEST_METHOD'] == 'POST') {
 	$email = $_POST['email'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $name = $_POST['name'];

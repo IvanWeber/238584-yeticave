@@ -56,7 +56,7 @@
                             <?php endif;?>
                         <?php endif;?>
                     </div>
-            <?php if (isset($_SESSION['user']) and $time_left>0): ?>
+            <?php if (isset($_SESSION['user']) && $time_left>0): ?>
             <form class="lot-item__form" action="lot.php?lot_id=<?=(int)$_GET['lot_id']?>" method="post">
               <p class="lot-item__form-item">
                 <label for="cost">Ваша ставка</label>
