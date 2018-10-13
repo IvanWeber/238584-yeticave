@@ -23,7 +23,13 @@ function ruble_display ($number) {
     return number_format ( ceil ($number), 0 , "." , " " ) . ' ₽';
 }
 
-/*Функция для отображения времени в формате д, ч, м, с*/
+/**
+ * Переводит временную метку или секунды в формат дней, часов, минут, секунд
+ *
+ * @param $timestamp int Временная метка или количество секунд
+ *
+ * @return string Время в формате д. ч. м. с.
+ */
 function timestamp_format ($timestamp) {
     $days=floor($timestamp/86400);
     $remain_time=$timestamp - $days*86400;
