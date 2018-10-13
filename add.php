@@ -8,7 +8,7 @@ if (!isset($_SESSION['user'])){
 require_once('functions.php');
 require_once('data.php');
 
-    $page_name = 'Yeti add';
+    $page_name = 'Добавить лот';
     $required_fields = ['lot-name', 'category', 'description', 'lot-rate', 'lot-step', 'lot-date'];
     $form_invalid = false;
     $category_check = false;
@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         }
     }
 }
-    if ($_SERVER['REQUEST_METHOD'] == 'POST' and !$category_check) {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && !$category_check) {
         $field_invalid['category'] = true;
         $form_invalid = true;
     } else {
@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 
     /*Сценарий выполнится, если все поля заполнены верно*/
-    if ($form_invalid==false and $_SERVER['REQUEST_METHOD'] == 'POST') {
+    if ($form_invalid==false && $_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $name = $_POST['lot-name'];
     $start_price = $_POST['lot-rate'];
@@ -84,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $add_lot_query='INSERT INTO lots (name, start_price, end_date_time, bet_step, description, image, category_id, creation_date_time)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
     $stmt = mysqli_prepare($con, $add_lot_query);
-
+    mysqli_stmt_error($stmt);
     mysqli_stmt_bind_param($stmt,'ssssssss',$name,$start_price, $end_date_time, $bet_step, $description,
         $image,  $category_id, $creation_date_time);
         mysqli_stmt_execute($stmt);

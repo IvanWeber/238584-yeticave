@@ -1,29 +1,8 @@
-<main>
-    <nav class="nav">
-      <ul class="nav__list container">
-        <li class="nav__item">
-          <a href="all-lots.html">Доски и лыжи</a>
-        </li>
-        <li class="nav__item">
-          <a href="all-lots.html">Крепления</a>
-        </li>
-        <li class="nav__item">
-          <a href="all-lots.html">Ботинки</a>
-        </li>
-        <li class="nav__item">
-          <a href="all-lots.html">Одежда</a>
-        </li>
-        <li class="nav__item">
-          <a href="all-lots.html">Инструменты</a>
-        </li>
-        <li class="nav__item">
-          <a href="all-lots.html">Разное</a>
-        </li>
-      </ul>
-    </nav>
+
+
     <form class="form container <?php if($form_invalid){print('form--invalid');}?>" action="sign-up.php" method="post" enctype="multipart/form-data"> <!-- form--invalid -->
       <h2>Регистрация нового аккаунта</h2>
-      <div class="form__item <?php if($field_invalid['email'] or !$email_valid){print('form__item--invalid');}?>"> <!-- form__item--invalid -->
+      <div class="form__item <?php if($field_invalid['email'] || !$email_valid){print('form__item--invalid');}?>"> <!-- form__item--invalid -->
         <label for="email">E-mail*</label>
         <input id="email" type="text" name="email" placeholder="Введите e-mail" value='<?=$filled_field_array['email']?>' required>
         <span class="form__error">Введите e-mail</span>
@@ -62,4 +41,3 @@
       <button type="submit" class="button">Зарегистрироваться</button>
       <a class="text-link" href="#">Уже есть аккаунт</a>
     </form>
-  </main>

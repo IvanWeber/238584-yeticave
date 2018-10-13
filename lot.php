@@ -50,7 +50,7 @@ $page_name=$lots_id_query_array[0]['name'];
 $strdatetime = strtotime($lots_id_query_array[0]['end_date_time']);
 $time_left = $strdatetime - time();
 
-/*Сценарий для поля ставки*/
+/*Сценарий для поля ставок*/
 if (isset($lots_related[0]['last_bet_price'])) {
     $min_bet=$lots_related_query_array[0]['last_bet_price']+$lots_id_query_array[0]['bet_step'];
 }
@@ -59,12 +59,12 @@ else {
 }
 
 $error_add_bet=false;
-if ($_SERVER['REQUEST_METHOD'] == 'POST' and $_POST['cost']>=$min_bet and $_POST['cost']%$lots_id_query_array[0]['bet_step']==0){
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['cost']>=$min_bet && $_POST['cost']%$lots_id_query_array[0]['bet_step']==0){
     $email=mysqli_real_escape_string($con, $_SESSION['user']['email']);
     $cost=$_POST['cost'];
     $lot_id=$_GET['lot_id'];
     $bet_date_time = date('Y-m-d H:i:s');
-    $add_bet_query='INSERT INTO bets (user_id, price, lot_id, date) VALUES ((SELECT id FROM users WHERE email="'.$email.'"), ?, ?, ?)';
+    $add_bet_query='INSERT INTO bets (user_id, price, lot_id, date) VALUES ("'.$_SESSION['user']['id'].'", ?, ?, ?)';
     $stmt = mysqli_prepare($con, $add_bet_query);
     mysqli_stmt_error($stmt );
     mysqli_stmt_bind_param($stmt,'sss',$cost, $lot_id, $bet_date_time);
@@ -80,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 $bet_query='SELECT users.name AS name, bets.price AS price, bets.date AS date FROM bets 
 JOIN lots ON lots.id=bets.lot_id
 JOIN users ON users.id=bets.user_id
-WHERE lot_id="'.$_GET['lot_id'].'"
+WHERE lot_id="'.(int)$_GET['lot_id'].'"
 ORDER BY date DESC;';
 $bet_query_result=mysqli_query($con, $bet_query);
 if(!$bet_query_result) {
