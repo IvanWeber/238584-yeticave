@@ -84,7 +84,7 @@
                     <table class="history__list">
                         <?php foreach ($bet_query_array as $key => $val): ?>
                             <tr class="history__item">
-                                <td class="history__name"><?= $val['name'] ?></td>
+                                <td class="history__name"><?= htmlspecialchars($val['name']) ?></td>
                                 <td class="history__price"><?= ruble_display($val['price']); ?></td>
                                 <td class="history__time"><?php if ((time() - strtotime($val['date'])) > 86400) {
                                         print($val['date']);
