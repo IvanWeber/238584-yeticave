@@ -12,6 +12,7 @@ $required_fields = ['email', 'password', 'name', 'message'];
 $form_invalid = false;
 $field_invalid = false;
 $email_valid = true;
+$filled_field_array = [];
 
 /*Валидация для формы и полей(заполнены ли поля)*/
 $post_valid_email = $_POST['email'] ?? null;

@@ -7,7 +7,7 @@
     } ?>"> <!-- form__item--invalid -->
         <label for="email">E-mail*</label>
         <input id="email" type="text" name="email" placeholder="Введите e-mail"
-               value='<?= $filled_field_array['email'] ?>' required>
+               value='<?= $filled_field_array['email'] ?? '' ?>' required>
         <span class="form__error">Введите e-mail</span>
     </div>
     <div class="form__item <?php if ($field_invalid['password']) {
@@ -15,14 +15,14 @@
     } ?>">
         <label for="password">Пароль*</label>
         <input id="password" type="text" name="password" placeholder="Введите пароль"
-               value='<?= $filled_field_array['password'] ?>' required>
+               value='<?= $filled_field_array['password'] ?? '' ?>' required>
         <span class="form__error">Введите пароль</span>
     </div>
     <div class="form__item <?php if ($field_invalid['name']) {
         print('form__item--invalid');
     } ?>">
         <label for="name">Имя*</label>
-        <input id="name" type="text" name="name" placeholder="Введите имя" value='<?= $filled_field_array['name'] ?>'
+        <input id="name" type="text" name="name" placeholder="Введите имя" value='<?= $filled_field_array['name'] ?? '' ?>'
                required>
         <span class="form__error">Введите имя</span>
     </div>
@@ -31,7 +31,7 @@
     } ?>">
         <label for="message">Контактные данные*</label>
         <textarea id="message" name="message" placeholder="Напишите как с вами связаться"
-                  required><?= $filled_field_array['message'] ?></textarea>
+                  required><?= $filled_field_array['message'] ?? ''?></textarea>
         <span class="form__error">Напишите как с вами связаться</span>
     </div>
     <div class="form__item form__item--file form__item--last">
