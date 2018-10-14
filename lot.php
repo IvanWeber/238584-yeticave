@@ -45,24 +45,25 @@ $page_name = $lots_id_query_array[0]['name'];
 $strdatetime = strtotime($lots_id_query_array[0]['end_date_time']);
 $time_left = $strdatetime - time();
 
-/*Проверка того, что пользователь еще не делал ставку(если делал, то запретить ему добавлять ставку в сценарии для поля ставок)*/
-$user_last_bet_query = 'SELECT bets.id FROM bets 
+/*Подготовка массива для проверки того, делал ли пользователь ставку на данный лот*/
+if (isset($_SESSION['user'])) {
+    $user_last_bet_query = 'SELECT bets.id FROM bets 
 WHERE lot_id = "' . (int)$_GET['lot_id'] . '" AND user_id = "' . $_SESSION['user']['id'] . '"';
-$user_last_bet_query_result = mysqli_query($con, $user_last_bet_query);
-if (!$user_last_bet_query_result) {
-    $error = mysqli_error($con);
-    print("Ошибка MySQL: " . $error);
-    die();
-}
-$user_last_bet_query_array = mysqli_fetch_all($user_last_bet_query_result, MYSQLI_ASSOC);
+    $user_last_bet_query_result = mysqli_query($con, $user_last_bet_query);
+    if (!$user_last_bet_query_result) {
+        $error = mysqli_error($con);
+        print("Ошибка MySQL: " . $error);
+        die();
+    }
+    $user_last_bet_query_array = mysqli_fetch_all($user_last_bet_query_result, MYSQLI_ASSOC);
 
-/*Сценарий для поля ставок*/
-if (isset($lots_related_query_array[0]['last_bet_price'])) {
-    $min_bet = $lots_related_query_array[0]['last_bet_price'] + $lots_id_query_array[0]['bet_step'];
-} else {
-    $min_bet = $lots_related_query_array[0]['start_price'] + $lots_id_query_array[0]['bet_step'];
+    /*Сценарий для поля ставок*/
+    if (isset($lots_related_query_array[0]['last_bet_price'])) {
+        $min_bet = $lots_related_query_array[0]['last_bet_price'] + $lots_id_query_array[0]['bet_step'];
+    } else {
+        $min_bet = $lots_related_query_array[0]['start_price'] + $lots_id_query_array[0]['bet_step'];
+    }
 }
-
 
 $error_add_bet = false;
 $error_is_user_bet = false;
@@ -81,7 +82,7 @@ if (empty($user_last_bet_query_array)) {
     } elseif ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['cost'] < $min_bet) {
         $error_add_bet = true;
     }
-} elseif ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($user_last_bet_query_array)) {
+} elseif (!empty($user_last_bet_query_array)) {
     $error_is_user_bet = true;
 }
 

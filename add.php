@@ -95,9 +95,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 if ($form_invalid == false && $_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $name = htmlspecialchars($_POST['lot-name']);
-    $start_price = $_POST['lot-rate'];
+    $start_price = (int)$_POST['lot-rate'];
     $end_date_time = $_POST['lot-date'];
-    $bet_step = $_POST['lot-step'];
+    $bet_step = (int)$_POST['lot-step'];
     $description = htmlspecialchars($_POST['description']);
     $image = $file_url;
     $category_id = $_POST['category'];

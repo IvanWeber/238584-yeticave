@@ -61,16 +61,19 @@
                     <form class="lot-item__form" action="lot.php?lot_id=<?= (int)$_GET['lot_id'] ?>" method="post">
                         <p class="lot-item__form-item">
                             <label for="cost">Ваша ставка</label>
-                            <input id="cost" type="number" name="cost"
+                            <?php if (!$error_is_user_bet): ?><input id="cost" type="number" name="cost"
                                    placeholder="<?php if (isset($lots_related[0]['last_bet_price'])) {
                                        print (ruble_display($lots_related[0]['last_bet_price'] + $lot[0]['bet_step']));
                                    } else {
                                        print((ruble_display($lots_related[0]['start_price'] + $lot[0]['bet_step'])));
                                    } ?>">
+                            <?php endif; ?>
                             <?php if ($error_add_bet): ?><span>Введите корректную сумму</span><?php endif; ?>
                             <?php if ($error_is_user_bet): ?><span>Вы уже сделали ставку</span><?php endif; ?>
                         </p>
+                        <?php if (!$error_is_user_bet): ?>
                         <button type="submit" class="button">Сделать ставку</button>
+                        <?php endif; ?>
                     </form>
                 <?php endif; ?>
             </div>
