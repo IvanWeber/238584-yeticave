@@ -16,7 +16,7 @@ $pag_sql = "SELECT COUNT(*) AS cnt
     FROM lots 
     JOIN categories ON lots.category_id=categories.id 
     LEFT OUTER JOIN bets ON lots.id=bets.lot_id
-    WHERE MATCH(lots.name, description) AGAINST(?) GROUP BY lots.name";
+    WHERE MATCH(lots.name, description) AGAINST(?) GROUP BY lots.id";
 $pag_stmt = mysqli_prepare($con, $pag_sql);
 mysqli_stmt_error($pag_stmt);
 mysqli_stmt_bind_param($pag_stmt, 's', $search);
@@ -54,7 +54,7 @@ if ($search) {
     FROM lots 
     JOIN categories ON lots.category_id=categories.id 
     LEFT OUTER JOIN bets ON lots.id=bets.lot_id
-    WHERE MATCH(lots.name, description) AGAINST(?) GROUP BY lots.name ORDER BY end_date_time DESC LIMIT ? OFFSET ?;";
+    WHERE MATCH(lots.name, description) AGAINST(?) GROUP BY lots.id ORDER BY end_date_time DESC LIMIT ? OFFSET ?;";
     $stmt = mysqli_prepare($con, $sql);
     mysqli_stmt_error($stmt);
     mysqli_stmt_bind_param($stmt, 'sss', $search, $page_items, $offset);
@@ -70,4 +70,5 @@ $page_content = include_template('search.php', ['lots' => $lots_searching_array,
 $layout_content = include_template('layout.php', ['page_content' => $page_content, 'categories' => $categories_query_array,
     'page_name' => $page_name]);
 print($layout_content);
-
+print($pages_count);
+print_r($pag_lots_searching_array );

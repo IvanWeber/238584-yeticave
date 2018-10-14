@@ -25,10 +25,11 @@ if (!$categories_result) {
 $categories_query_array = mysqli_fetch_all($categories_result, MYSQLI_ASSOC);
 
 $newlots_query = "SELECT lots.id AS lot_id, lots.name, lots.start_price, lots.image AS url, MAX(bets.price) AS price, 
-COUNT(bets.price) AS bets_num, creation_date_time, categories.name AS category, end_date_time, bets.id AS bet_id
+COUNT(bets.price) AS bets_num, creation_date_time, categories.name AS category, end_date_time, bets.id AS bet_id, lots.user_id
 FROM lots 
 LEFT OUTER JOIN bets ON lots.id=bets.lot_id 
-JOIN categories ON lots.category_id=categories.id WHERE end_date_time>CURRENT_DATE GROUP BY lots.name 
+JOIN categories ON lots.category_id=categories.id WHERE end_date_time>CURRENT_DATE GROUP BY lots.id 
+
 ORDER BY creation_date_time DESC;";
 
 $newlots_result = mysqli_query($con, $newlots_query);

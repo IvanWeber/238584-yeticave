@@ -70,7 +70,7 @@
                    value="<?= $filled_field_array['lot-step'] ?>" required>
             <span class="form__error">Введите шаг ставки</span>
         </div>
-        <div class="form__item <?php if ($field_invalid['lot-date']) {
+        <div class="form__item <?php if (!empty ($field_invalid['lot-date'])) {
             print('form__item--invalid');
         } ?>">
             <label for="lot-date">Дата окончания торгов</label>

@@ -102,13 +102,15 @@ if ($form_invalid == false && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $image = $file_url;
     $category_id = $_POST['category'];
     $creation_date_time = date('Y-m-d H:i:s');
+    $user_id = $_SESSION['user']['id'];
 
-    $add_lot_query = 'INSERT INTO lots (name, start_price, end_date_time, bet_step, description, image, category_id, creation_date_time)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+
+    $add_lot_query = 'INSERT INTO lots (name, start_price, end_date_time, bet_step, description, image, category_id, creation_date_time, lots.user_id)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
     $stmt = mysqli_prepare($con, $add_lot_query);
     mysqli_stmt_error($stmt);
-    mysqli_stmt_bind_param($stmt, 'ssssssss', $name, $start_price, $end_date_time, $bet_step, $description,
-        $image, $category_id, $creation_date_time);
+    mysqli_stmt_bind_param($stmt, 'sssssssss', $name, $start_price, $end_date_time, $bet_step, $description,
+        $image, $category_id, $creation_date_time, $user_id);
     mysqli_stmt_execute($stmt);
     $add_lot_related_query = "SELECT MAX(lots.id) AS id FROM lots;";
     $add_lot__related_query_result = mysqli_query($con, $add_lot_related_query);
