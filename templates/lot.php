@@ -69,7 +69,7 @@
                                    } ?>">
                             <?php endif; ?>
                             <?php if ($error_add_bet): ?><span>Введите корректную сумму</span><?php endif; ?>
-                            <?php if ($error_is_user_bet): ?><span>Вы уже сделали ставку</span><?php endif; ?>
+                            <?php if ($error_is_user_bet): ?><span>Вы не можете сделать ставку</span><?php endif; ?>
                         </p>
                         <?php if (!$error_is_user_bet): ?>
                         <button type="submit" class="button">Сделать ставку</button>

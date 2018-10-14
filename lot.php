@@ -15,7 +15,7 @@ if (!$lots_id_result) {
 $lots_id_query_array = mysqli_fetch_all($lots_id_result, MYSQLI_ASSOC);
 
 $lots_related_query = "SELECT lots.id AS lot_id, lots.name, lots.start_price, lots.image AS url, MAX(bets.price) AS last_bet_price, 
-COUNT(bets.price) AS bets_numbers, creation_date_time, categories.name AS category, end_date_time
+COUNT(bets.price) AS bets_numbers, creation_date_time, categories.name AS category, end_date_time, lots.user_id 
 FROM lots 
 LEFT OUTER JOIN bets ON lots.id=bets.lot_id 
 JOIN categories ON lots.category_id=categories.id WHERE lots.id='" . (int)$_GET['lot_id'] . "' GROUP BY lots.name 
@@ -65,10 +65,15 @@ WHERE lot_id = "' . (int)$_GET['lot_id'] . '" AND user_id = "' . $_SESSION['user
     }
 }
 
+
 $error_add_bet = false;
 $error_is_user_bet = false;
+$lots_related_query_array[0]['user_id'] = $lots_related_query_array[0]['user_id'] ?? '';
+if ($lots_related_query_array[0]['user_id'] == $_SESSION['user']['id']) {
+    $error_is_user_bet = true;
+}
 if (empty($user_last_bet_query_array)) {
-    if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['cost'] >= $min_bet) {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['cost'] >= $min_bet && $lots_related_query_array['user_id'] != $_SESSION['user']['id']) {
         $email = mysqli_real_escape_string($con, $_SESSION['user']['email']);
         $cost = $_POST['cost'];
         $lot_id = (int)$_GET['lot_id'];
