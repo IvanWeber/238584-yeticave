@@ -94,4 +94,5 @@ if(!$newlots_result) {
 $newlots_query_array=mysqli_fetch_all($newlots_result, MYSQLI_ASSOC);
 
 
-
+error_reporting(E_ALL);
+ini_set('display_errors', 1);

@@ -4,10 +4,6 @@ session_start();
 require_once('functions.php');
 require_once('data.php');
 
-$con = mysqli_connect("localhost", "root", "PasswordforMySQL","Yeticave");
-
-mysqli_set_charset($con, "utf8");
-
 $lots_id_result=mysqli_query($con, "SELECT * FROM lots WHERE id='".(int)$_GET['lot_id']."';");
 
 if(!$lots_id_result) {
@@ -62,7 +58,7 @@ $error_add_bet=false;
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['cost']>=$min_bet && $_POST['cost']%$lots_id_query_array[0]['bet_step']==0){
     $email=mysqli_real_escape_string($con, $_SESSION['user']['email']);
     $cost=$_POST['cost'];
-    $lot_id=$_GET['lot_id'];
+    $lot_id=(int)$_GET['lot_id'];
     $bet_date_time = date('Y-m-d H:i:s');
     $add_bet_query='INSERT INTO bets (user_id, price, lot_id, date) VALUES ("'.$_SESSION['user']['id'].'", ?, ?, ?)';
     $stmt = mysqli_prepare($con, $add_bet_query);

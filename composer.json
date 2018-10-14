@@ -1,0 +1,7 @@
+{
+    "name": "vendor_yeticave/yeticave",
+    "description": "Snowboarding auction",
+    "type": "project",
+    "license": "MIT",
+    "require": {}
+}
