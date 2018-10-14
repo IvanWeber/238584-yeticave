@@ -4,6 +4,8 @@ require_once('data.php');
 
 session_start();
 
+$page_name = 'Вход на сайт Yeticave';
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $form = $_POST;
 
@@ -52,7 +54,7 @@ else {
 }
 
 $layout_content = include_template('layout.php', ['page_content'   => $page_content,'is_auth' => $is_auth,
-    'user_name' => $user_name, 'user_avatar' => $user_avatar, 'categories' => $categories_query_array]);
+    'user_name' => $user_name, 'user_avatar' => $user_avatar, 'categories' => $categories_query_array, 'page_name' => $page_name]);
 
 
 print($layout_content);

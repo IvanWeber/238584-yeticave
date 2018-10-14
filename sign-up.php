@@ -7,23 +7,33 @@ if (isset($_SESSION['user'])){
 require_once('functions.php');
 require_once('data.php');
 
-$page_name = 'Registration on Yeticave';
+$page_name = 'Регистрация на сайте Yeticave';
 $required_fields = ['email', 'password', 'name', 'message'];
 $form_invalid = false;
 $field_invalid = false;
 $email_valid = true;
 
     /*Валидация для формы и полей(заполнены ли поля)*/
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        foreach ($required_fields as $field) {
-            if (empty($_POST[$field])) {
-                $field_invalid[$field] = true;
-            }
-            if ($field_invalid[$field] == true) {
-                $form_invalid = true;
-            }
+$post_valid_email = $_POST['email'] ?? null;
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    foreach ($required_fields as $field) {
+        if (empty($_POST[$field])) {
+            $field_invalid[$field] = true;
+        } else {
+            $field_invalid[$field] = false;
+        }
+        if ($field_invalid[$field] == true) {
+            $form_invalid = true;
         }
     }
+
+    if (!filter_var($post_valid_email, FILTER_VALIDATE_EMAIL)){
+        $field_invalid['email'] = true;
+        $form_invalid = true;
+    }
+}
+
 	
 	/*Валидация для поля email(проверка email на совпадение с имеющимися в БД)*/
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -80,4 +90,3 @@ $email_valid = true;
         'page_content' => $page_content]);
 
     print ($layout_content);
-	

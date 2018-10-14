@@ -12,7 +12,7 @@ require_once('data.php');
     $required_fields = ['lot-name', 'category', 'description', 'lot-rate', 'lot-step', 'lot-date'];
     $form_invalid = false;
     $category_check = false;
-    /*Валидация для формы и полей*/
+    /*Валидация для формы и полей(проверка на заполненность)*/
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         foreach ($required_fields as $field) {
             if (empty($_POST[$field])) {
@@ -26,7 +26,32 @@ require_once('data.php');
         }
     }
 
-    /*Валидация для поля выбора категории*/
+    /*Валидация полей стартовой цены и шага ствки*/
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if ((int)$_POST['lot-rate']<=0 || !gettype((int)$_POST['lot-rate'])=='integer') {
+        $field_invalid['lot-rate'] = true;
+        $form_invalid = true;
+    }
+}
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if ((int)$_POST['lot-step']<=0 || !gettype((int)$_POST['lot-step'])=='integer') {
+        $field_invalid['lot-step'] = true;
+        $form_invalid = true;
+    }
+}
+
+/*Валидация поля даты*/
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $date = new DateTime($_POST['lot-date']);
+    $formatted_date = $date->format('d-m-Y');
+
+    if ((strtotime($formatted_date) - strtotime('Today')) < 86400) {
+        $field_invalid['lot-date'] = true;
+        $form_invalid = true;
+    }
+}
+    /*Валидация для поля выбора категории(выбрана ли категория)*/
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     foreach ($categories_query_array as $key => $val){
         if ($val['id']==$_POST['category']) {
@@ -40,6 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     } else {
         $field_invalid['category'] = false;
     }
+
 
     /*Запомнить введенные в форму данные*/
     foreach ($required_fields as $field) {
@@ -72,11 +98,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     /*Сценарий выполнится, если все поля заполнены верно*/
     if ($form_invalid==false && $_SERVER['REQUEST_METHOD'] == 'POST') {
 
-        $name = $_POST['lot-name'];
+        $name = htmlspecialchars($_POST['lot-name']);
     $start_price = $_POST['lot-rate'];
     $end_date_time = $_POST['lot-date'];
     $bet_step = $_POST['lot-step'];
-    $description = $_POST['description'];
+    $description = htmlspecialchars($_POST['description']);
     $image = $file_url;
     $category_id = $_POST['category'];
     $creation_date_time = date('Y-m-d H:i:s');
@@ -106,7 +132,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         'page_content' => $page_content]);
 
     print ($layout_content);
-
 
 
 
