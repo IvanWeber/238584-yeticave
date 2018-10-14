@@ -4,9 +4,9 @@ session_start();
 require_once('functions.php');
 require_once('data.php');
 
-$page_name='Поиск по лотам';
+$page_name = 'Поиск по лотам';
 $search = $_GET['search'] ?? '';
-$page_error= 1;
+$page_error = 1;
 
 /*Пагинация*/
 $cur_page = $_GET['page'] ?? 1;
@@ -19,7 +19,7 @@ $pag_sql = "SELECT COUNT(*) AS cnt
     WHERE MATCH(lots.name, description) AGAINST(?) GROUP BY lots.name";
 $pag_stmt = mysqli_prepare($con, $pag_sql);
 mysqli_stmt_error($pag_stmt);
-mysqli_stmt_bind_param($pag_stmt,'s',$search);
+mysqli_stmt_bind_param($pag_stmt, 's', $search);
 mysqli_stmt_execute($pag_stmt);
 $pag_result = mysqli_stmt_get_result($pag_stmt);
 $pag_lots_searching_array = mysqli_fetch_all($pag_result, MYSQLI_ASSOC);
@@ -45,7 +45,6 @@ if (isset ($_GET['page'])) {
 }
 
 
-
 /*Вывод лотов на страницу*/
 $offset = ($cur_page - 1) * $page_items;
 if ($search) {
@@ -58,7 +57,7 @@ if ($search) {
     WHERE MATCH(lots.name, description) AGAINST(?) GROUP BY lots.name ORDER BY end_date_time DESC LIMIT ? OFFSET ?;";
     $stmt = mysqli_prepare($con, $sql);
     mysqli_stmt_error($stmt);
-    mysqli_stmt_bind_param($stmt,'sss',$search, $page_items, $offset);
+    mysqli_stmt_bind_param($stmt, 'sss', $search, $page_items, $offset);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
 
@@ -66,11 +65,9 @@ if ($search) {
 }
 
 
-
-
-$page_content=include_template('search.php', ['lots'=>$lots_searching_array, 'all_lots'=>$pag_lots_searching_array,
-    'pages_count'=>$pages_count]);
-$layout_content = include_template('layout.php', ['page_content'=>$page_content, 'categories'=>$categories_query_array,
-    'page_name'=>$page_name]);
+$page_content = include_template('search.php', ['lots' => $lots_searching_array, 'all_lots' => $pag_lots_searching_array,
+    'pages_count' => $pages_count]);
+$layout_content = include_template('layout.php', ['page_content' => $page_content, 'categories' => $categories_query_array,
+    'page_name' => $page_name]);
 print($layout_content);
 

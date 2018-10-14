@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once('functions.php');
 require_once('data.php');
 
@@ -26,35 +26,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!count($errors) && $user) {
         if (password_verify($form['password'], $user['password'])) {
             $_SESSION['user'] = $user;
-        }
-        else {
+        } else {
             $errors['password'] = 'Неверный пароль';
         }
-    }
-    else {
+    } else {
         $errors['email'] = 'Такой пользователь не найден';
     }
 
     if (count($errors)) {
         $page_content = include_template('login.php', ['form' => $form, 'errors' => $errors]);
-    }
-    else {
+    } else {
         header("Location: /");
         exit();
     }
-}
-else {
+} else {
     if (isset($_SESSION['user'])) {
         $page_content = include_template('index.php', ['username' => $_SESSION['user']['name'],
             'categories' => $categories_query_array, 'adverts' => $newlots_query_array]);
-    }
-    else {
+    } else {
         $page_content = include_template('login.php', []);
     }
 }
 
-$layout_content = include_template('layout.php', ['page_content'   => $page_content,'is_auth' => $is_auth,
-    'user_name' => $user_name, 'user_avatar' => $user_avatar, 'categories' => $categories_query_array, 'page_name' => $page_name]);
+$layout_content = include_template('layout.php', ['page_content' => $page_content, 'is_auth' => $is_auth,
+    'categories' => $categories_query_array, 'page_name' => $page_name]);
 
 
 print($layout_content);
