@@ -31,24 +31,24 @@
         </ul>
     </section>
     <ul class="pagination-list">
-        <?php if ($_GET['page'] == 1): ?>
+        <?php if ((int)$_GET['page'] === 1): ?>
         <?php else: ?>
             <li class="pagination-item pagination-item-prev"><a
                         href="search.php?page=<?= $_GET['page'] - 1; ?>&search=<?= $_GET['search'] ?>">Назад</a></li>
         <?php endif; ?>
         <?php foreach ($all_lots as $key => $val): ?>
-            <?php if (($key + 1) % 9 == 0): ?>
-                <li class="pagination-item <?php if ($_GET['page'] == (($key + 1) / 9)) {
+            <?php if (($key + 1) % 9 === 0): ?>
+                <li class="pagination-item <?php if ((int)$_GET['page'] === (($key + 1) / 9)) {
                     print('pagination-item-active');
                 } ?>">
                     <a href="search.php?page=<?= ($key + 1) / 9 ?>&search=<?= $_GET['search'] ?>"><?= ($key + 1) / 9 ?></a>
                 </li>
             <?php endif; ?>
         <?php endforeach; ?>
-        <li class="pagination-item <?php if ($_GET['page'] == $pages_count) {
+        <li class="pagination-item <?php if ((int)$_GET['page'] === (int)$pages_count) {
             print('pagination-item-active');
         } ?>"><a href="search.php?page=<?= $pages_count ?>&search=<?= $_GET['search'] ?>"><?= $pages_count ?></a></li>
-        <?php if ($_GET['page'] == $pages_count): ?>
+        <?php if ((int)$_GET['page'] === (int)$pages_count): ?>
         <?php else: ?>
             <li class="pagination-item pagination-item-next"><a
                         href="search.php?page=<?= $_GET['page'] + 1; ?>&search=<?= $_GET['search'] ?>">Вперед</a></li>

@@ -93,7 +93,7 @@
                                         print(' назад');
                                     } ?></td>
                             </tr>
-                            <?php if ($key == 9) {
+                            <?php if ($key === 9) {
                                 break;
                             } ?>
                         <?php endforeach; ?>

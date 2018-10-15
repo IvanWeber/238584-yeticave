@@ -6,7 +6,7 @@ session_start();
 
 $page_name = 'Вход на сайт Yeticave';
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $form = $_POST;
 
     $required = ['email', 'password'];

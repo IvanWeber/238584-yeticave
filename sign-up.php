@@ -17,14 +17,14 @@ $filled_field_array = [];
 /*Валидация для формы и полей(заполнены ли поля)*/
 $post_valid_email = $_POST['email'] ?? null;
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     foreach ($required_fields as $field) {
         if (empty($_POST[$field])) {
             $field_invalid[$field] = true;
         } else {
             $field_invalid[$field] = false;
         }
-        if ($field_invalid[$field] == true) {
+        if ($field_invalid[$field] === true) {
             $form_invalid = true;
         }
     }
@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
 /*Валидация для поля email(проверка email на совпадение с имеющимися в БД)*/
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email_query = "SELECT email FROM users";
     $email_query_result = mysqli_query($con, $email_query);
     if (!$email_query_result) {
@@ -47,14 +47,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
     $email_query_array = mysqli_fetch_all($email_query_result, MYSQLI_ASSOC);
     foreach ($email_query_array as $key => $val) {
-        if ($val['email'] == $_POST['email']) {
+        if ($val['email'] === $_POST['email']) {
             $email_valid = false;
         }
     }
 }
 
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     /*Запомнить введенные в форму данные*/
     foreach ($required_fields as $field) {
         $filled_field_array[$field] = $_POST[$field] ?? '';
@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     /*Сценарий выполнится, если валидация прошла успешно*/
-    if ($form_invalid == false && $email_valid == true && $_SERVER['REQUEST_METHOD'] == 'POST') {
+    if ($form_invalid === false && $email_valid === true && $_SERVER['REQUEST_METHOD'] === 'POST') {
         $email = $_POST['email'];
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
         $name = $_POST['name'];

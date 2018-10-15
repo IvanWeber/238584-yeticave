@@ -33,7 +33,7 @@ $pages_count = ceil($items_count / $page_items);
 $pages = range(1, $pages_count);
 if (isset ($_GET['page'])) {
     foreach ($pages as $key => $val) {
-        if (($val == $_GET['page'])) {
+        if (((int)$val === (int)$_GET['page'])) {
             $page_error = 0;
         }
     }

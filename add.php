@@ -13,31 +13,31 @@ $required_fields = ['lot-name', 'category', 'description', 'lot-rate', 'lot-step
 $form_invalid = false;
 $category_check = false;
 /*Валидация для формы и полей(проверка на заполненность)*/
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     foreach ($required_fields as $field) {
         if (empty($_POST[$field])) {
             $field_invalid[$field] = true;
         } else {
             $field_invalid[$field] = false;
         }
-        if ($field_invalid[$field] == true) {
+        if ($field_invalid[$field] === true) {
             $form_invalid = true;
         }
     }
 }
 
 
-if ($form_invalid == false) {
+if ($form_invalid === false) {
     /*Валидация полей стартовой цены и шага ствки*/
 
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ((int)$_POST['lot-rate'] <= 0) {
             $field_invalid['lot-rate'] = true;
             $form_invalid = true;
         }
     }
 
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ((int)$_POST['lot-step'] <= 0) {
             $field_invalid['lot-step'] = true;
             $form_invalid = true;
@@ -45,7 +45,7 @@ if ($form_invalid == false) {
     }
 
     /*Валидация поля даты*/
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $date = new DateTime($_POST['lot-date']);
         $formatted_date = $date->format('d-m-Y');
 
@@ -55,14 +55,14 @@ if ($form_invalid == false) {
         }
     }
     /*Валидация для поля выбора категории(выбрана ли категория)*/
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         foreach ($categories_query_array as $key => $val) {
-            if ($val['id'] == $_POST['category']) {
+            if ($val['id'] === $_POST['category']) {
                 $category_check = true;
             }
         }
     }
-    if ($_SERVER['REQUEST_METHOD'] == 'POST' && !$category_check) {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$category_check) {
         $field_invalid['category'] = true;
         $form_invalid = true;
     } else {
@@ -78,7 +78,7 @@ foreach ($required_fields as $field) {
 
 /*Формирование ссылки на загруженное изображение и валидация загрузки изображения*/
 $image_invalid = false;
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!empty($_FILES['lot-photo']['name'])) {
         $file_name = uniqid() . $_FILES['lot-photo']['name'];
         $file_path = 'uploads/';
@@ -92,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 /*Сценарий выполнится, если все поля заполнены верно*/
-if ($form_invalid == false && $_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($form_invalid === false && $_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $name = htmlspecialchars($_POST['lot-name']);
     $start_price = (int)$_POST['lot-rate'];
