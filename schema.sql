@@ -48,5 +48,7 @@ CREATE TABLE bets (
   FOREIGN KEY (lot_id) REFERENCES lots (id)
 );
 
+CREATE FULLTEXT INDEX gif_ft_search
+  ON gifs(title, description)
 
 	
