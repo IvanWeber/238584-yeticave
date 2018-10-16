@@ -1,8 +1,10 @@
 <?php
+session_start();
 require_once('functions.php');
 require_once('data.php');
+require_once('getwinner.php');
 
-session_start();
+
 $page_name = 'Yeticave';
 
 $page_content = include_template('index.php', ['categories' => $categories_query_array, 'adverts' => $newlots_query_array]);

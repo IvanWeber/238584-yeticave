@@ -37,7 +37,7 @@
                         href="search.php?page=<?= $_GET['page'] - 1; ?>&search=<?= $_GET['search'] ?>">Назад</a></li>
         <?php endif; ?>
         <?php foreach ($all_lots as $key => $val): ?>
-            <?php if (($key + 1) % 9 === 0): ?>
+            <?php if ((($key + 1) % 9 === 0) && (($key + 1) / 9!==(int)$pages_count)): ?>
                 <li class="pagination-item <?php if ((int)$_GET['page'] === (($key + 1) / 9)) {
                     print('pagination-item-active');
                 } ?>">
