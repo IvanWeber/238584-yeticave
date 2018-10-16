@@ -1,6 +1,11 @@
 <?php
 
-/*Функция-шаблонизатор*/
+/**
+ * Функция-шаблонизатор получает название шаблона и данные для него, возвращает результат в виде шаблона с переданными данными
+ * @param $name
+ * @param $data
+ * @return false|string
+ */
 function include_template($name, $data)
 {
     $name = 'templates/' . $name;
@@ -19,7 +24,11 @@ function include_template($name, $data)
     return $result;
 }
 
-/*Функция для отображения цены в рублях*/
+/**
+ * Представляет переданное число в виде числа с пробелами между разрядами, кратными тысяче, а также со знаком рубля после числа
+ * @param $number
+ * @return string
+ */
 function ruble_display($number)
 {
     return number_format(ceil($number), 0, ".", " ") . ' ₽';

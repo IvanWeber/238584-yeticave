@@ -18,7 +18,7 @@
             <select id="category" name="category" required>
                 <option>Выберите категорию</option>
                 <?php foreach ($categories as $key => $val): ?>
-                    <option value="<?= $val['id']; ?>" <?php if ($filled_field_array['category'] == $val['id']) {
+                    <option value="<?= $val['id']; ?>" <?php if ($filled_field_array['category'] === $val['id']) {
                         print('selected');
                     } ?>><?= $val['name']; ?></option>
                 <?php endforeach; ?>

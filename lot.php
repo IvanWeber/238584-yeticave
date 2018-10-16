@@ -46,6 +46,8 @@ $strdatetime = strtotime($lots_id_query_array[0]['end_date_time']);
 $time_left = $strdatetime - time();
 
 /*Подготовка массива для проверки того, делал ли пользователь ставку на данный лот*/
+$error_add_bet = false;
+$error_is_user_bet = false;
 if (isset($_SESSION['user'])) {
     $user_last_bet_query = 'SELECT bets.id FROM bets 
 WHERE lot_id = "' . (int)$_GET['lot_id'] . '" AND user_id = "' . $_SESSION['user']['id'] . '"';
@@ -63,17 +65,15 @@ WHERE lot_id = "' . (int)$_GET['lot_id'] . '" AND user_id = "' . $_SESSION['user
     } else {
         $min_bet = $lots_related_query_array[0]['start_price'] + $lots_id_query_array[0]['bet_step'];
     }
-}
 
 
-$error_add_bet = false;
-$error_is_user_bet = false;
-$lots_related_query_array[0]['user_id'] = $lots_related_query_array[0]['user_id'] ?? '';
-if ($lots_related_query_array[0]['user_id'] == $_SESSION['user']['id']) {
+
+    $lots_related_query_array[0]['user_id'] = $lots_related_query_array[0]['user_id'] ?? '';
+if ($lots_related_query_array[0]['user_id'] === $_SESSION['user']['id']) {
     $error_is_user_bet = true;
 }
 if (empty($user_last_bet_query_array)) {
-    if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['cost'] >= $min_bet && $lots_related_query_array['user_id'] != $_SESSION['user']['id']) {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['cost'] >= $min_bet && $lots_related_query_array['user_id'] !== $_SESSION['user']['id']) {
         $email = mysqli_real_escape_string($con, $_SESSION['user']['email']);
         $cost = $_POST['cost'];
         $lot_id = (int)$_GET['lot_id'];
@@ -84,13 +84,13 @@ if (empty($user_last_bet_query_array)) {
         mysqli_stmt_bind_param($stmt, 'sss', $cost, $lot_id, $bet_date_time);
         mysqli_stmt_execute($stmt);
         header("Location: /lot.php?lot_id=" . (int)$_GET['lot_id']);
-    } elseif ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['cost'] < $min_bet) {
+    } elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['cost'] < $min_bet) {
         $error_add_bet = true;
     }
 } elseif (!empty($user_last_bet_query_array)) {
     $error_is_user_bet = true;
 }
-
+}
 
 /*Сценарий для добавления последний ставок в таблицу*/
 
@@ -105,6 +105,7 @@ if (!$bet_query_result) {
     print("Ошибка MySQL: " . $error);
     die();
 }
+
 $bet_query_array = mysqli_fetch_all($bet_query_result, MYSQLI_ASSOC);
 
 

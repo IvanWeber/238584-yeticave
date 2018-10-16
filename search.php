@@ -33,7 +33,7 @@ $pages_count = ceil($items_count / $page_items);
 $pages = range(1, $pages_count);
 if (isset ($_GET['page'])) {
     foreach ($pages as $key => $val) {
-        if (($val == $_GET['page'])) {
+        if (((int)$val === (int)$_GET['page'])) {
             $page_error = 0;
         }
     }
@@ -70,5 +70,4 @@ $page_content = include_template('search.php', ['lots' => $lots_searching_array,
 $layout_content = include_template('layout.php', ['page_content' => $page_content, 'categories' => $categories_query_array,
     'page_name' => $page_name]);
 print($layout_content);
-print($pages_count);
-print_r($pag_lots_searching_array );
+

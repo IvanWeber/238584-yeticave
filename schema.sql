@@ -48,5 +48,7 @@ CREATE TABLE bets (
   FOREIGN KEY (lot_id) REFERENCES lots (id)
 );
 
+CREATE FULLTEXT INDEX lots_ft_search
+  ON lots(name, description)
 
 	
