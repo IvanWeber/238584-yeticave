@@ -127,7 +127,7 @@ if ($form_invalid === false && $_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $page_content = include_template('add.php', ['categories' => $categories_query_array, 'field_invalid' => $field_invalid
     , 'form_invalid' => $form_invalid, 'filled_field_array' => $filled_field_array, 'image_invalid' => $image_invalid]);
-$layout_content = include_template('layout.php', ['page_name' => $page_name, 'is_auth' => $is_auth, 'categories' => $categories_query_array,
+$layout_content = include_template('layout.php', ['page_name' => $page_name, 'categories' => $categories_query_array,
     'page_content' => $page_content]);
 
 print ($layout_content);

@@ -32,7 +32,7 @@
                         <img src="<?= $_SESSION['user']['avatar'] ?>" width="40" height="40" alt="Пользователь">
                     </div>
                     <div class="user-menu__logged">
-                        <p><?= htmlspecialchars($_SESSION['user']['name']) ?></p>
+                        <a href="my-lots.php"><p> <?= htmlspecialchars($_SESSION['user']['name']) ?></p></a>
                         <a href="logout.php">Выход</a>
                     </div>
                 <?php else: ?>
@@ -54,7 +54,7 @@
             <ul class="nav__list container">
                 <?php foreach ($categories as $key => $val): ?>
                     <li class="nav__item">
-                        <a href="all-lots.html"><?= $val['name'] ?></a>
+                        <a href="lots-by-category.php?category_id=<?=$val['id']?>"><?= $val['name'] ?></a>
                     </li>
                 <?php endforeach; ?>
             </ul>
@@ -69,7 +69,7 @@
             <!--заполните этот список из массива категорий-->
             <?php foreach ($categories as $key => $val): ?>
                 <li class="nav__item">
-                    <a href="pages/all-lots.html"><?= $val['name']; ?></a>
+                    <a href="lots-by-category.php?category_id=<?=$val['id']?>"><?= $val['name']; ?></a>
                 </li>
             <?php endforeach; ?>
         </ul>

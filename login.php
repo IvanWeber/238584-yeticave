@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-$layout_content = include_template('layout.php', ['page_content' => $page_content, 'is_auth' => $is_auth,
+$layout_content = include_template('layout.php', ['page_content' => $page_content,
     'categories' => $categories_query_array, 'page_name' => $page_name]);
 
 

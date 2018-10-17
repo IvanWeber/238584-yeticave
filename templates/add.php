@@ -1,3 +1,4 @@
+
 <form class="form form--add-lot container <?php if ($form_invalid) {
     print('form--invalid');
 } ?>" action="add.php" method="post" enctype="multipart/form-data"> <!-- form--invalid -->

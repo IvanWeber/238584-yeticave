@@ -89,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 $page_content = include_template('sign-up.php', ['field_invalid' => $field_invalid, 'form_invalid' => $form_invalid, 'filled_field_array' => $filled_field_array, 'email_valid' => $email_valid]);
-$layout_content = include_template('layout.php', ['page_name' => $page_name, 'is_auth' => $is_auth,
+$layout_content = include_template('layout.php', ['page_name' => $page_name,
     'categories' => $categories_query_array, 'page_content' => $page_content]);
 
 print ($layout_content);

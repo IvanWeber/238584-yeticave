@@ -111,6 +111,6 @@ $bet_query_array = mysqli_fetch_all($bet_query_result, MYSQLI_ASSOC);
 
 $page_content = include_template('lot.php', ['lot' => $lots_id_query_array, 'lots_related' => $lots_related_query_array,
     'time_left' => $time_left, 'error_add_bet' => $error_add_bet, 'error_is_user_bet' => $error_is_user_bet, 'bet_query_array' => $bet_query_array]);
-$layout_content = include_template('layout.php', ['page_name' => $page_name, 'is_auth' => $is_auth,
+$layout_content = include_template('layout.php', ['page_name' => $page_name,
     'categories' => $categories_query_array, 'page_content' => $page_content]);
 print($layout_content);
