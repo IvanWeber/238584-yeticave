@@ -4,6 +4,11 @@ require_once('functions.php');
 require_once('data.php');
 require_once('getwinner.php');
 
+if (empty($_GET['page'])){
+    $_GET['page']=1;
+}
+
+
 $page_name = 'Yeticave';
 
 $page_error = 1;
