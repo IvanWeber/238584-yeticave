@@ -13,7 +13,7 @@
     <header class="main-header">
         <div class="main-header__container container">
             <h1 class="visually-hidden">YetiCave</h1>
-            <a class="main-header__logo" href="index.php">
+            <a class="main-header__logo" href="index.php?page=1">
                 <img src="img/logo.svg" width="160" height="39" alt="Логотип компании YetiCave">
             </a>
             <form class="main-header__search" method="get" action="search.php">
@@ -32,7 +32,7 @@
                         <img src="<?= $_SESSION['user']['avatar'] ?>" width="40" height="40" alt="Пользователь">
                     </div>
                     <div class="user-menu__logged">
-                        <p><?= htmlspecialchars($_SESSION['user']['name']) ?></p>
+                        <a href="my-lots.php"><p> <?= htmlspecialchars($_SESSION['user']['name']) ?></p></a>
                         <a href="logout.php">Выход</a>
                     </div>
                 <?php else: ?>
@@ -50,15 +50,7 @@
         </div>
     </header>
     <main>
-        <nav class="nav">
-            <ul class="nav__list container">
-                <?php foreach ($categories as $key => $val): ?>
-                    <li class="nav__item">
-                        <a href="all-lots.html"><?= $val['name'] ?></a>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
-        </nav>
+
         <?= $page_content; ?>
     </main>
 </div>
@@ -69,7 +61,7 @@
             <!--заполните этот список из массива категорий-->
             <?php foreach ($categories as $key => $val): ?>
                 <li class="nav__item">
-                    <a href="pages/all-lots.html"><?= $val['name']; ?></a>
+                    <a href="lots-by-category.php?category_id=<?=$val['id']?>&page=1"><?= $val['name']; ?></a>
                 </li>
             <?php endforeach; ?>
         </ul>

@@ -1,7 +1,7 @@
 <nav class="nav">
     <ul class="nav__list container">
         <?php foreach ($categories as $key => $val): ?>
-            <li class="nav__item">
+            <li class="nav__item <?php if ($val['id']===$_GET['category_id']) {print(' nav__item--current');};?>">
                 <a href="lots-by-category.php?category_id=<?=$val['id']?>&page=1"><?= $val['name'] ?></a>
             </li>
         <?php endforeach; ?>
@@ -9,7 +9,7 @@
 </nav>
 <div class="container">
     <section class="lots">
-        <h2>Результаты поиска по запросу «<span><?= $_GET['search'] ?></span>»</h2>
+        <h2>Все лоты в категории <span><?=$lots[0]['category']?></span></h2>
         <ul class="lots__list">
             <?php foreach ($lots as $key => $val): ?>
                 <li class="lots__item lot">
@@ -43,24 +43,24 @@
         <?php if ((int)$_GET['page'] === 1): ?>
         <?php else: ?>
             <li class="pagination-item pagination-item-prev"><a
-                        href="search.php?page=<?= $_GET['page'] - 1; ?>&search=<?= $_GET['search'] ?>">Назад</a></li>
+                        href="lots-by-category.php?page=<?= $_GET['page'] - 1; ?>&category_id=<?= $_GET['category_id'] ?>">Назад</a></li>
         <?php endif; ?>
         <?php foreach ($all_lots as $key => $val): ?>
             <?php if ((($key + 1) % 9 === 0) && (($key + 1) / 9!==(int)$pages_count)): ?>
                 <li class="pagination-item <?php if ((int)$_GET['page'] === (($key + 1) / 9)) {
                     print('pagination-item-active');
                 } ?>">
-                    <a href="search.php?page=<?= ($key + 1) / 9 ?>&search=<?= $_GET['search'] ?>"><?= ($key + 1) / 9 ?></a>
+                    <a href="lots-by-category.php?page=<?= ($key + 1) / 9 ?>&category_id=<?= $_GET['category_id'] ?>"><?= ($key + 1) / 9 ?></a>
                 </li>
             <?php endif; ?>
         <?php endforeach; ?>
         <li class="pagination-item <?php if ((int)$_GET['page'] === (int)$pages_count) {
             print('pagination-item-active');
-        } ?>"><a href="search.php?page=<?= $pages_count ?>&search=<?= $_GET['search'] ?>"><?= $pages_count ?></a></li>
+        } ?>"><a href="lots-by-category.php?page=<?= $pages_count ?>&category_id=<?= $_GET['category_id'] ?>"><?= $pages_count ?></a></li>
         <?php if ((int)$_GET['page'] === (int)$pages_count): ?>
         <?php else: ?>
             <li class="pagination-item pagination-item-next"><a
-                        href="search.php?page=<?= $_GET['page'] + 1; ?>&search=<?= $_GET['search'] ?>">Вперед</a></li>
+                        href="lots-by-category.php?page=<?= $_GET['page'] + 1; ?>&category_id=<?= $_GET['category_id'] ?>">Вперед</a></li>
         <?php endif; ?>
     </ul>
 </div>

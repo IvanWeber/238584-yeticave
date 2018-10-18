@@ -1,3 +1,12 @@
+<nav class="nav">
+    <ul class="nav__list container">
+        <?php foreach ($categories as $key => $val): ?>
+            <li class="nav__item">
+                <a href="lots-by-category.php?category_id=<?=$val['id']?>&page=1"><?= $val['name'] ?></a>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+</nav>
 <form class="form container <?php if ($form_invalid) {
     print('form--invalid');
 } ?>" action="sign-up.php" method="post" enctype="multipart/form-data"> <!-- form--invalid -->

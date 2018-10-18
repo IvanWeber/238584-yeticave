@@ -44,11 +44,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $page_content = include_template('index.php', ['username' => $_SESSION['user']['name'],
             'categories' => $categories_query_array, 'adverts' => $newlots_query_array]);
     } else {
-        $page_content = include_template('login.php', []);
+        $page_content = include_template('login.php', ['categories' => $categories_query_array]);
     }
 }
 
-$layout_content = include_template('layout.php', ['page_content' => $page_content, 'is_auth' => $is_auth,
+$layout_content = include_template('layout.php', ['page_content' => $page_content,
     'categories' => $categories_query_array, 'page_name' => $page_name]);
 
 

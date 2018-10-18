@@ -66,7 +66,7 @@ if ($search) {
 
 
 $page_content = include_template('search.php', ['lots' => $lots_searching_array, 'all_lots' => $pag_lots_searching_array,
-    'pages_count' => $pages_count]);
+    'pages_count' => $pages_count,'categories' => $categories_query_array]);
 $layout_content = include_template('layout.php', ['page_content' => $page_content, 'categories' => $categories_query_array,
     'page_name' => $page_name]);
 print($layout_content);
