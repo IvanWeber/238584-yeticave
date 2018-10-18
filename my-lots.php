@@ -30,7 +30,7 @@ if (!$bets_result) {
 
 $bets_query_array = mysqli_fetch_all($bets_result, MYSQLI_ASSOC);
 
-$page_content = include_template('my-lots.php', ['bets_query_array' => $bets_query_array]);
+$page_content = include_template('my-lots.php', ['bets_query_array' => $bets_query_array,'categories' => $categories_query_array]);
 $layout_content = include_template('layout.php', ['page_name' => $page_name, 'categories' => $categories_query_array,
     'page_content' => $page_content]);
 

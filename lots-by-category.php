@@ -20,7 +20,7 @@ $pag_sql = "SELECT COUNT(*) AS cnt
     WHERE category_id = ? GROUP BY lots.id";
 $pag_stmt = mysqli_prepare($con, $pag_sql);
 mysqli_stmt_error($pag_stmt);
-mysqli_stmt_bind_param($pag_stmt, 's', $search);
+mysqli_stmt_bind_param($pag_stmt, 's', $category_id);
 mysqli_stmt_execute($pag_stmt);
 $pag_result = mysqli_stmt_get_result($pag_stmt);
 $pag_lots_searching_array = mysqli_fetch_all($pag_result, MYSQLI_ASSOC);
@@ -66,8 +66,9 @@ if ($category_id) {
 }
 
 
-$page_content = include_template('lots-by-category.php', ['lots' => $lots_searching_array, 'all_lots' => $pag_lots_searching_array,
+$page_content = include_template('lots-by-category.php', ['lots' => $lots_searching_array,'categories' => $categories_query_array, 'all_lots' => $pag_lots_searching_array,
     'pages_count' => $pages_count]);
 $layout_content = include_template('layout.php', ['page_content' => $page_content, 'categories' => $categories_query_array,
     'page_name' => $page_name]);
 print($layout_content);
+

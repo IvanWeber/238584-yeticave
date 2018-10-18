@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $page_content = include_template('index.php', ['username' => $_SESSION['user']['name'],
             'categories' => $categories_query_array, 'adverts' => $newlots_query_array]);
     } else {
-        $page_content = include_template('login.php', []);
+        $page_content = include_template('login.php', ['categories' => $categories_query_array]);
     }
 }
 

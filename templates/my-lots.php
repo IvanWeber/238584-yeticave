@@ -1,3 +1,12 @@
+<nav class="nav">
+    <ul class="nav__list container">
+        <?php foreach ($categories as $key => $val): ?>
+            <li class="nav__item">
+                <a href="lots-by-category.php?category_id=<?=$val['id']?>&page=1"><?= $val['name'] ?></a>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+</nav>
 <section class="rates container">
     <h2>Мои ставки</h2>
     <table class="rates__list">
