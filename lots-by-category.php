@@ -5,7 +5,6 @@ require_once('functions.php');
 require_once('data.php');
 
 $page_name = 'Поиск по лотам';
-$search = $_GET['search'] ?? '';
 $page_error = 1;
 
 /*Пагинация*/
