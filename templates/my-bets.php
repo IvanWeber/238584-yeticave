@@ -11,6 +11,33 @@
     <h2>Мои ставки</h2>
     <table class="rates__list">
         <?php foreach ($bets_query_array as $key => $val):?>
+        <?php if (isset($val['winner_id']) && $_SESSION['user']['id']===$val['winner_id']): ?>
+        <?php foreach ($owner_contacts as $owner_key => $owner_val):?>
+        <tr class="rates__item rates__item--win">
+            <td class="rates__info">
+                <div class="rates__img">
+                    <img src="<?=$val['image']?>" width="54" height="40" alt="Крепления">
+                </div>
+                <div>
+                    <h3 class="rates__title"><a href="lot.php?lot_id=<?=$val['lot_id'];?>"><?=$val['lot_name'];?></a></h3>
+                    <p><?=$owner_val['contacts']?></p>
+                </div>
+            </td>
+            <td class="rates__category">
+                <?=$val['category']?>
+            </td>
+            <td class="rates__timer">
+                <div class="timer timer--win">Ставка выиграла</div>
+            </td>
+            <td class="rates__price">
+                <?=ruble_display($val['price']);?>
+            </td>
+            <td class="rates__time">
+                <?=timestamp_format(time() - strtotime($val['bet_date_time'])) . ' назад'?>
+            </td>
+        </tr>
+                <?php endforeach; ?>
+        <?php elseif ((strtotime($val['end_date_time']) - time())>0): ?>
         <tr class="rates__item">
             <td class="rates__info">
                 <div class="rates__img">
@@ -22,16 +49,39 @@
                 <?=$val['category']?>
             </td>
             <td class="rates__timer">
-                <div class="timer timer--finishing"><?=timestamp_format(strtotime($val['end_date_time']) - time())?></div>
+                <div class="timer <?php if ((strtotime($val['end_date_time']) - time())<604800) {print('timer--finishing');};?>"><?=timestamp_format(strtotime($val['end_date_time']) - time())?></div>
             </td>
             <td class="rates__price">
                 <?=ruble_display($val['price']);?>
             </td>
             <td class="rates__time">
-                <?=timestamp_format(strtotime($val['end_date_time']) - time())?>
+                <?=timestamp_format(time() - strtotime($val['bet_date_time'])) . ' назад'?>
             </td>
         </tr>
+        <?php elseif ((strtotime($val['end_date_time']) - time())<0): ?>
+                <tr class="rates__item rates__item--end">
+                    <td class="rates__info">
+                        <div class="rates__img">
+                            <img src="<?=$val['image']?>" width="54" height="40" alt="Куртка">
+                        </div>
+                        <h3 class="rates__title"><a href="lot.php?lot_id=<?=$val['lot_id'];?>"><?=$val['lot_name'];?></a></h3>
+                    </td>
+                    <td class="rates__category">
+                        <?=$val['category']?>
+                    </td>
+                    <td class="rates__timer">
+                        <div class="timer timer--end">Торги окончены</div>
+                    </td>
+                    <td class="rates__price">
+                        <?=ruble_display($val['price']);?>
+                    </td>
+                    <td class="rates__time">
+                        <?=timestamp_format(time() - strtotime($val['bet_date_time'])) . ' назад'?>
+                    </td>
+                </tr>
+        <?php endif; ?>
         <?php endforeach; ?>
+<!--      Класс для красного таймера:  timer--finishing, 86400-->
 <!--        <tr class="rates__item">-->
 <!--            <td class="rates__info">-->
 <!--                <div class="rates__img">-->

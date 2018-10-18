@@ -34,9 +34,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (count($errors)) {
-        $page_content = include_template('login.php', ['form' => $form, 'errors' => $errors]);
+        $page_content = include_template('login.php', ['form' => $form, 'errors' => $errors, 'categories' => $categories_query_array]);
     } else {
-        header("Location: /");
+        header("Location: /index.php?page=1");
         exit();
     }
 } else {

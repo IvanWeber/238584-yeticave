@@ -68,8 +68,7 @@ if (!empty($pag_lots_searching_array)) {
         'pages_count' => $pages_count]);
 }
 else {
-    $page_content = include_template('category-fail.php', ['categories' => $categories_query_array, 'all_lots' => $pag_lots_searching_array,
-        'pages_count' => $pages_count]);
+    $page_content = include_template('category-fail.php', ['categories' => $categories_query_array]);
 }
 
 
@@ -77,4 +76,3 @@ $layout_content = include_template('layout.php', ['page_content' => $page_conten
     'page_name' => $page_name]);
 print($layout_content);
 
-print_r($pag_lots_searching_array);

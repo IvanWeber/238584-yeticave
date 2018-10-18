@@ -2,73 +2,240 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title><?= $page_name; ?></title>
+    <title>Мои ставки</title>
     <link href="css/normalize.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-    <link rel="shortcut icon" href="img/yetiicon.png" type="image/png">
 </head>
 <body>
+
 <div class="page-wrapper">
 
     <header class="main-header">
         <div class="main-header__container container">
             <h1 class="visually-hidden">YetiCave</h1>
-            <a class="main-header__logo" href="index.php?page=1">
+            <a class="main-header__logo" href="index.html">
                 <img src="img/logo.svg" width="160" height="39" alt="Логотип компании YetiCave">
             </a>
-            <form class="main-header__search" method="get" action="search.php">
+            <form class="main-header__search" method="get" action="https://echo.htmlacademy.ru">
                 <input type="search" name="search" placeholder="Поиск лота">
-                <input type="hidden" name="page" value="1">
-                <input class="main-header__search-btn" type="submit" name="">
+                <input class="main-header__search-btn" type="submit" name="find" value="Найти">
             </form>
-            <?php if (isset($_SESSION['user'])): ?>
-                <a class="main-header__add-lot button" href="add.php">Добавить лот</a>
-            <?php endif; ?>
-
+            <a class="main-header__add-lot button" href="add-lot.html">Добавить лот</a>
             <nav class="user-menu">
-
-                <?php if (isset($_SESSION['user'])): ?>
-                    <div class="user-menu__image">
-                        <img src="<?= $_SESSION['user']['avatar'] ?>" width="40" height="40" alt="Пользователь">
-                    </div>
-                    <div class="user-menu__logged">
-                        <a href="my-bets.php"><p> <?= htmlspecialchars($_SESSION['user']['name']) ?></p></a>
-                        <a href="logout.php">Выход</a>
-                    </div>
-                <?php else: ?>
-                    <ul class="user-menu__list">
-                        <li class="user-menu__item">
-                            <a href="sign-up.php">Регистрация</a>
-                        </li>
-                        <li class="user-menu__item">
-                            <a href="login.php">Вход</a>
-                        </li>
-                    </ul>
-                <?php endif; ?>
-
+                <ul class="user-menu__list">
+                    <li class="user-menu__item">
+                        <a href="sign-up.html">Регистрация</a>
+                    </li>
+                    <li class="user-menu__item">
+                        <a href="login.html">Вход</a>
+                    </li>
+                </ul>
             </nav>
         </div>
     </header>
-    <main>
 
-        <?= $page_content; ?>
+    <main>
+        <nav class="nav">
+            <ul class="nav__list container">
+                <li class="nav__item">
+                    <a href="all-lots.html">Доски и лыжи</a>
+                </li>
+                <li class="nav__item">
+                    <a href="all-lots.html">Крепления</a>
+                </li>
+                <li class="nav__item">
+                    <a href="all-lots.html">Ботинки</a>
+                </li>
+                <li class="nav__item">
+                    <a href="all-lots.html">Одежда</a>
+                </li>
+                <li class="nav__item">
+                    <a href="all-lots.html">Инструменты</a>
+                </li>
+                <li class="nav__item">
+                    <a href="all-lots.html">Разное</a>
+                </li>
+            </ul>
+        </nav>
+        <section class="rates container">
+            <h2>Мои ставки</h2>
+            <table class="rates__list">
+                <tr class="rates__item">
+                    <td class="rates__info">
+                        <div class="rates__img">
+                            <img src="img/rate1.jpg" width="54" height="40" alt="Сноуборд">
+                        </div>
+                        <h3 class="rates__title"><a href="lot.html">2014 Rossignol District Snowboard</a></h3>
+                    </td>
+                    <td class="rates__category">
+                        Доски и лыжи
+                    </td>
+                    <td class="rates__timer">
+                        <div class="timer timer--finishing">07:13:34</div>
+                    </td>
+                    <td class="rates__price">
+                        10 999 р
+                    </td>
+                    <td class="rates__time">
+                        5 минут назад
+                    </td>
+                </tr>
+                <tr class="rates__item">
+                    <td class="rates__info">
+                        <div class="rates__img">
+                            <img src="img/rate2.jpg" width="54" height="40" alt="Сноуборд">
+                        </div>
+                        <h3 class="rates__title"><a href="lot.html">DC Ply Mens 2016/2017 Snowboard</a></h3>
+                    </td>
+                    <td class="rates__category">
+                        Доски и лыжи
+                    </td>
+                    <td class="rates__timer">
+                        <div class="timer timer--finishing">07:13:34</div>
+                    </td>
+                    <td class="rates__price">
+                        10 999 р
+                    </td>
+                    <td class="rates__time">
+                        20 минут назад
+                    </td>
+                </tr>
+                <tr class="rates__item rates__item--win">
+                    <td class="rates__info">
+                        <div class="rates__img">
+                            <img src="img/rate3.jpg" width="54" height="40" alt="Крепления">
+                        </div>
+                        <div>
+                            <h3 class="rates__title"><a href="lot.html">Крепления Union Contact Pro 2015 года размер
+                                L/XL</a></h3>
+                            <p>Телефон +7 900 667-84-48, Скайп: Vlas92. Звонить с 14 до 20</p>
+                        </div>
+                    </td>
+                    <td class="rates__category">
+                        Крепления
+                    </td>
+                    <td class="rates__timer">
+                        <div class="timer timer--win">Ставка выиграла</div>
+                    </td>
+                    <td class="rates__price">
+                        10 999 р
+                    </td>
+                    <td class="rates__time">
+                        Час назад
+                    </td>
+                </tr>
+                <tr class="rates__item">
+                    <td class="rates__info">
+                        <div class="rates__img">
+                            <img src="img/rate4.jpg" width="54" height="40" alt="Ботинки">
+                        </div>
+                        <h3 class="rates__title"><a href="lot.html">Ботинки для сноуборда DC Mutiny Charocal</a></h3>
+                    </td>
+                    <td class="rates__category">
+                        Ботинки
+                    </td>
+                    <td class="rates__timer">
+                        <div class="timer">07:13:34</div>
+                    </td>
+                    <td class="rates__price">
+                        10 999 р
+                    </td>
+                    <td class="rates__time">
+                        Вчера, в 21:30
+                    </td>
+                </tr>
+                <tr class="rates__item rates__item--end">
+                    <td class="rates__info">
+                        <div class="rates__img">
+                            <img src="img/rate5.jpg" width="54" height="40" alt="Куртка">
+                        </div>
+                        <h3 class="rates__title"><a href="lot.html">Куртка для сноуборда DC Mutiny Charocal</a></h3>
+                    </td>
+                    <td class="rates__category">
+                        Одежда
+                    </td>
+                    <td class="rates__timer">
+                        <div class="timer timer--end">Торги окончены</div>
+                    </td>
+                    <td class="rates__price">
+                        10 999 р
+                    </td>
+                    <td class="rates__time">
+                        Вчера, в 21:30
+                    </td>
+                </tr>
+                <tr class="rates__item rates__item--end">
+                    <td class="rates__info">
+                        <div class="rates__img">
+                            <img src="img/rate6.jpg" width="54" height="40" alt="Маска">
+                        </div>
+                        <h3 class="rates__title"><a href="lot.html">Маска Oakley Canopy</a></h3>
+                    </td>
+                    <td class="rates__category">
+                        Разное
+                    </td>
+                    <td class="rates__timer">
+                        <div class="timer timer--end">Торги окончены</div>
+                    </td>
+                    <td class="rates__price">
+                        10 999 р
+                    </td>
+                    <td class="rates__time">
+                        19.03.17 в 08:21
+                    </td>
+                </tr>
+                <tr class="rates__item rates__item--end">
+                    <td class="rates__info">
+                        <div class="rates__img">
+                            <img src="img/rate7.jpg" width="54" height="40" alt="Сноуборд">
+                        </div>
+                        <h3 class="rates__title"><a href="lot.html">DC Ply Mens 2016/2017 Snowboard</a></h3>
+                    </td>
+                    <td class="rates__category">
+                        Доски и лыжи
+                    </td>
+                    <td class="rates__timer">
+                        <div class="timer timer--end">Торги окончены</div>
+                    </td>
+                    <td class="rates__price">
+                        10 999 р
+                    </td>
+                    <td class="rates__time">
+                        19.03.17 в 08:21
+                    </td>
+                </tr>
+            </table>
+        </section>
     </main>
+
 </div>
 
 <footer class="main-footer">
     <nav class="nav">
         <ul class="nav__list container">
-            <!--заполните этот список из массива категорий-->
-            <?php foreach ($categories as $key => $val): ?>
-                <li class="nav__item">
-                    <a href="lots-by-category.php?category_id=<?=$val['id']?>&page=1"><?= $val['name']; ?></a>
-                </li>
-            <?php endforeach; ?>
+            <li class="nav__item">
+                <a href="all-lots.html">Доски и лыжи</a>
+            </li>
+            <li class="nav__item">
+                <a href="all-lots.html">Крепления</a>
+            </li>
+            <li class="nav__item">
+                <a href="all-lots.html">Ботинки</a>
+            </li>
+            <li class="nav__item">
+                <a href="all-lots.html">Одежда</a>
+            </li>
+            <li class="nav__item">
+                <a href="all-lots.html">Инструменты</a>
+            </li>
+            <li class="nav__item">
+                <a href="all-lots.html">Разное</a>
+            </li>
         </ul>
     </nav>
     <div class="main-footer__bottom container">
         <div class="main-footer__copyright">
-            <p>© 2018, YetiCave</p>
+            <p>© 2017, YetiCave</p>
             <p>Интернет-аукцион сноубордического и горнолыжного снаряжения</p>
         </div>
         <div class="main-footer__social social">
@@ -109,9 +276,7 @@
                 </svg>
             </a>
         </div>
-        <?php if (isset($_SESSION['user'])): ?>
-            <a class="main-footer__add-lot button" href="add.php">Добавить лот</a>
-        <?php endif; ?>
+        <a class="main-footer__add-lot button" href="add-lot.html">Добавить лот</a>
         <div class="main-footer__developed-by">
             <span class="visually-hidden">Разработано:</span>
             <a class="logo-academy" href="https://htmlacademy.ru/intensive/php">

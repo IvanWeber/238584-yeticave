@@ -30,9 +30,15 @@
                                     <span class="lot__cost"><?= $val['start_price'] ?><b class="rub">р</b></span>
                                 <?php endif; ?>
                             </div>
-                            <div class="lot__timer timer">
-                                <?= timestamp_format(strtotime($val['end_date_time']) - time()); ?>
-                            </div>
+                            <?php if (strtotime($val['end_date_time']) - time()>0): ?>
+                                <div class="lot__timer timer <?php if ((strtotime($val['end_date_time']) - time())<604800) {print('timer--finishing');};?>">
+                                    <?=timestamp_format(strtotime($val['end_date_time']) - time());?>
+                                </div>
+                            <?php else: ?>
+                                <div>
+                                    <?='Лот закрыт ' . $val['end_date_time'];?>
+                                </div>
+                            <?php endif;?>
                         </div>
                     </div>
                 </li>
