@@ -1,15 +1,17 @@
 <nav class="nav">
     <ul class="nav__list container">
         <?php foreach ($categories as $key => $val): ?>
-            <li class="nav__item <?php if ($val['id']===$_GET['category_id']) {print(' nav__item--current');};?>">
-                <a href="lots-by-category.php?category_id=<?=$val['id']?>&page=1"><?= $val['name'] ?></a>
+            <li class="nav__item <?php if ($val['id'] === $_GET['category_id']) {
+                print(' nav__item--current');
+            }; ?>">
+                <a href="lots-by-category.php?category_id=<?= $val['id'] ?>&page=1"><?= $val['name'] ?></a>
             </li>
         <?php endforeach; ?>
     </ul>
 </nav>
 <div class="container">
     <section class="lots">
-        <h2>Все лоты в категории <span><?=$lots[0]['category']?></span></h2>
+        <h2>Все лоты в категории <span><?= $lots[0]['category'] ?></span></h2>
         <ul class="lots__list">
             <?php foreach ($lots as $key => $val): ?>
                 <li class="lots__item lot">
@@ -30,9 +32,17 @@
                                     <span class="lot__cost"><?= $val['start_price'] ?><b class="rub">р</b></span>
                                 <?php endif; ?>
                             </div>
-                            <div class="lot__timer timer">
-                                <?= timestamp_format(strtotime($val['end_date_time']) - time()); ?>
-                            </div>
+                            <?php if (strtotime($val['end_date_time']) - time() > 0): ?>
+                                <div class="lot__timer timer <?php if ((strtotime($val['end_date_time']) - time()) < 604800) {
+                                    print('timer--finishing');
+                                }; ?>">
+                                    <?= timestamp_format(strtotime($val['end_date_time']) - time()); ?>
+                                </div>
+                            <?php else: ?>
+                                <div>
+                                    <?= 'Лот закрыт ' . $val['end_date_time']; ?>
+                                </div>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </li>
@@ -43,10 +53,11 @@
         <?php if ((int)$_GET['page'] === 1): ?>
         <?php else: ?>
             <li class="pagination-item pagination-item-prev"><a
-                        href="lots-by-category.php?page=<?= $_GET['page'] - 1; ?>&category_id=<?= $_GET['category_id'] ?>">Назад</a></li>
+                        href="lots-by-category.php?page=<?= $_GET['page'] - 1; ?>&category_id=<?= $_GET['category_id'] ?>">Назад</a>
+            </li>
         <?php endif; ?>
         <?php foreach ($all_lots as $key => $val): ?>
-            <?php if ((($key + 1) % 9 === 0) && (($key + 1) / 9!==(int)$pages_count)): ?>
+            <?php if ((($key + 1) % 9 === 0) && (($key + 1) / 9 !== (int)$pages_count)): ?>
                 <li class="pagination-item <?php if ((int)$_GET['page'] === (($key + 1) / 9)) {
                     print('pagination-item-active');
                 } ?>">
@@ -56,11 +67,14 @@
         <?php endforeach; ?>
         <li class="pagination-item <?php if ((int)$_GET['page'] === (int)$pages_count) {
             print('pagination-item-active');
-        } ?>"><a href="lots-by-category.php?page=<?= $pages_count ?>&category_id=<?= $_GET['category_id'] ?>"><?= $pages_count ?></a></li>
+        } ?>">
+            <a href="lots-by-category.php?page=<?= $pages_count ?>&category_id=<?= $_GET['category_id'] ?>"><?= $pages_count ?></a>
+        </li>
         <?php if ((int)$_GET['page'] === (int)$pages_count): ?>
         <?php else: ?>
             <li class="pagination-item pagination-item-next"><a
-                        href="lots-by-category.php?page=<?= $_GET['page'] + 1; ?>&category_id=<?= $_GET['category_id'] ?>">Вперед</a></li>
+                        href="lots-by-category.php?page=<?= $_GET['page'] + 1; ?>&category_id=<?= $_GET['category_id'] ?>">Вперед</a>
+            </li>
         <?php endif; ?>
     </ul>
 </div>

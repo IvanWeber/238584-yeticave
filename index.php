@@ -4,6 +4,11 @@ require_once('functions.php');
 require_once('data.php');
 require_once('getwinner.php');
 
+if (empty($_GET['page'])) {
+    $_GET['page'] = 1;
+}
+
+
 $page_name = 'Yeticave';
 
 $page_error = 1;
@@ -48,9 +53,9 @@ if (isset ($_GET['page'])) {
     }
 }
 
-
-/*Вывод лотов на страницу*/
-$offset = ($cur_page - 1) * $page_items;
+if (!empty($pag_lots_searching_array)) {
+    /*Вывод лотов на страницу*/
+    $offset = ($cur_page - 1) * $page_items;
 
     $sql = 'SELECT lots.id, creation_date_time, lots.name, description, image, start_price, end_date_time, bet_step,
  categories.name AS category, lots.category_id AS category_id, COUNT(bets.id) AS bets_num, bets.id AS bet_id, MAX(bets.price) AS price,
@@ -58,19 +63,21 @@ $offset = ($cur_page - 1) * $page_items;
     FROM lots 
     JOIN categories ON lots.category_id=categories.id 
     LEFT OUTER JOIN bets ON lots.id=bets.lot_id
-    WHERE end_date_time>CURRENT_TIMESTAMP GROUP BY lots.id ORDER BY end_date_time DESC LIMIT ? OFFSET ?;';
+    WHERE end_date_time>CURRENT_TIMESTAMP GROUP BY lots.id ORDER BY end_date_time ASC LIMIT ? OFFSET ?;';
     $stmt = mysqli_prepare($con, $sql);
     mysqli_stmt_error($stmt);
-    mysqli_stmt_bind_param($stmt, 'ss',  $page_items, $offset);
+    mysqli_stmt_bind_param($stmt, 'ss', $page_items, $offset);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
 
     $lots_searching_array = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
 
-
-$page_content = include_template('index.php', ['lots' => $lots_searching_array,'categories' => $categories_query_array,
-    'all_lots' => $pag_lots_searching_array, 'pages_count' => $pages_count]);
+    $page_content = include_template('index.php', ['lots' => $lots_searching_array, 'categories' => $categories_query_array,
+        'all_lots' => $pag_lots_searching_array, 'pages_count' => $pages_count]);
+} else {
+    $page_content = include_template('index-fail.php', ['categories' => $categories_query_array]);
+}
 $layout_content = include_template('layout.php', ['page_content' => $page_content, 'categories' => $categories_query_array,
     'page_name' => $page_name]);
 print($layout_content);

@@ -2,7 +2,7 @@
     <ul class="nav__list container">
         <?php foreach ($categories as $key => $val): ?>
             <li class="nav__item">
-                <a href="lots-by-category.php?category_id=<?=$val['id']?>&page=1"><?= $val['name'] ?></a>
+                <a href="lots-by-category.php?category_id=<?= $val['id'] ?>&page=1"><?= $val['name'] ?></a>
             </li>
         <?php endforeach; ?>
     </ul>
@@ -30,9 +30,15 @@
                                     <span class="lot__cost"><?= $val['start_price'] ?><b class="rub">р</b></span>
                                 <?php endif; ?>
                             </div>
-                            <div class="lot__timer timer">
-                                <?= timestamp_format(strtotime($val['end_date_time']) - time()); ?>
-                            </div>
+                            <?php if (strtotime($val['end_date_time']) - time() > 0): ?>
+                                <div class="lot__timer timer">
+                                    <?= timestamp_format(strtotime($val['end_date_time']) - time()); ?>
+                                </div>
+                            <?php else: ?>
+                                <div>
+                                    <?= 'Лот закрыт ' . $val['end_date_time']; ?>
+                                </div>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </li>
@@ -46,7 +52,7 @@
                         href="search.php?page=<?= $_GET['page'] - 1; ?>&search=<?= $_GET['search'] ?>">Назад</a></li>
         <?php endif; ?>
         <?php foreach ($all_lots as $key => $val): ?>
-            <?php if ((($key + 1) % 9 === 0) && (($key + 1) / 9!==(int)$pages_count)): ?>
+            <?php if ((($key + 1) % 9 === 0) && (($key + 1) / 9 !== (int)$pages_count)): ?>
                 <li class="pagination-item <?php if ((int)$_GET['page'] === (($key + 1) / 9)) {
                     print('pagination-item-active');
                 } ?>">

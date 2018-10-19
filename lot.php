@@ -67,29 +67,28 @@ WHERE lot_id = "' . (int)$_GET['lot_id'] . '" AND user_id = "' . $_SESSION['user
     }
 
 
-
     $lots_related_query_array[0]['user_id'] = $lots_related_query_array[0]['user_id'] ?? '';
-if ($lots_related_query_array[0]['user_id'] === $_SESSION['user']['id']) {
-    $error_is_user_bet = true;
-}
-if (empty($user_last_bet_query_array)) {
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['cost'] >= $min_bet && $lots_related_query_array['user_id'] !== $_SESSION['user']['id']) {
-        $email = mysqli_real_escape_string($con, $_SESSION['user']['email']);
-        $cost = $_POST['cost'];
-        $lot_id = (int)$_GET['lot_id'];
-        $bet_date_time = date('Y-m-d H:i:s');
-        $add_bet_query = 'INSERT INTO bets (user_id, price, lot_id, date) VALUES ("' . $_SESSION['user']['id'] . '", ?, ?, ?)';
-        $stmt = mysqli_prepare($con, $add_bet_query);
-        mysqli_stmt_error($stmt);
-        mysqli_stmt_bind_param($stmt, 'sss', $cost, $lot_id, $bet_date_time);
-        mysqli_stmt_execute($stmt);
-        header("Location: /lot.php?lot_id=" . (int)$_GET['lot_id']);
-    } elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['cost'] < $min_bet) {
-        $error_add_bet = true;
+    if ($lots_related_query_array[0]['user_id'] === $_SESSION['user']['id']) {
+        $error_is_user_bet = true;
     }
-} elseif (!empty($user_last_bet_query_array)) {
-    $error_is_user_bet = true;
-}
+    if (empty($user_last_bet_query_array)) {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['cost'] >= $min_bet && $lots_related_query_array['user_id'] !== $_SESSION['user']['id']) {
+            $email = mysqli_real_escape_string($con, $_SESSION['user']['email']);
+            $cost = $_POST['cost'];
+            $lot_id = (int)$_GET['lot_id'];
+            $bet_date_time = date('Y-m-d H:i:s');
+            $add_bet_query = 'INSERT INTO bets (user_id, price, lot_id, date) VALUES ("' . $_SESSION['user']['id'] . '", ?, ?, ?)';
+            $stmt = mysqli_prepare($con, $add_bet_query);
+            mysqli_stmt_error($stmt);
+            mysqli_stmt_bind_param($stmt, 'sss', $cost, $lot_id, $bet_date_time);
+            mysqli_stmt_execute($stmt);
+            header("Location: /lot.php?lot_id=" . (int)$_GET['lot_id']);
+        } elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['cost'] < $min_bet) {
+            $error_add_bet = true;
+        }
+    } elseif (!empty($user_last_bet_query_array)) {
+        $error_is_user_bet = true;
+    }
 }
 
 /*Сценарий для добавления последний ставок в таблицу*/
@@ -109,7 +108,7 @@ if (!$bet_query_result) {
 $bet_query_array = mysqli_fetch_all($bet_query_result, MYSQLI_ASSOC);
 
 
-$page_content = include_template('lot.php', ['lot' => $lots_id_query_array,'categories' => $categories_query_array, 'lots_related' => $lots_related_query_array,
+$page_content = include_template('lot.php', ['lot' => $lots_id_query_array, 'categories' => $categories_query_array, 'lots_related' => $lots_related_query_array,
     'time_left' => $time_left, 'error_add_bet' => $error_add_bet, 'error_is_user_bet' => $error_is_user_bet, 'bet_query_array' => $bet_query_array]);
 $layout_content = include_template('layout.php', ['page_name' => $page_name,
     'categories' => $categories_query_array, 'page_content' => $page_content]);
