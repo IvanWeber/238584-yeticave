@@ -7,7 +7,8 @@
             <!--заполните этот список из массива категорий-->
             <?php foreach ($categories as $key => $val): ?>
                 <li class="promo__item promo__item--boards">
-                    <a class="promo__link" href="lots-by-category.php?category_id=<?=$val['id']?>&page=1"><?= $val['name']; ?></a>
+                    <a class="promo__link"
+                       href="lots-by-category.php?category_id=<?= $val['id'] ?>&page=1"><?= $val['name']; ?></a>
                 </li>
             <?php endforeach; ?>
         </ul>

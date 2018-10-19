@@ -25,32 +25,31 @@ if (!$winner_lot_result) {
 $winner_lots_query_array = mysqli_fetch_all($winner_lot_result, MYSQLI_ASSOC);
 
 
-
-foreach($winner_lots_query_array as $winner_lots_key => $winner_lots_val) {
+foreach ($winner_lots_query_array as $winner_lots_key => $winner_lots_val) {
     if (empty ($winner_lots_val['lot_winner_id'])) {
-    $add_winner_query = 'UPDATE lots
+        $add_winner_query = 'UPDATE lots
 SET winner_id ="' . $winner_lots_val['winner_id'] . '"
 WHERE lots.id="' . $winner_lots_val['lot_id'] . '"';
-    $stmt = mysqli_prepare($con, $add_winner_query);
-    mysqli_stmt_error($stmt);
-    mysqli_stmt_execute($stmt);
+        $stmt = mysqli_prepare($con, $add_winner_query);
+        mysqli_stmt_error($stmt);
+        mysqli_stmt_execute($stmt);
 
 
-    $mail_content = include_template('email.php', ['user_name' => $winner_lots_val['user_name'],
-        'lot_name' => $winner_lots_val['lot_name'], 'lot_id' => $winner_lots_val['lot_id']]);
+        $mail_content = include_template('email.php', ['user_name' => $winner_lots_val['user_name'],
+            'lot_name' => $winner_lots_val['lot_name'], 'lot_id' => $winner_lots_val['lot_id']]);
 // Конфигурация траспорта
-    $transport = (new Swift_SmtpTransport('phpdemo.ru', 25))
-        ->setUsername('keks@phpdemo.ru')
-        ->setPassword('htmlacademy');
+        $transport = (new Swift_SmtpTransport('phpdemo.ru', 25))
+            ->setUsername('keks@phpdemo.ru')
+            ->setPassword('htmlacademy');
 // Формирование сообщения
-    $message = new Swift_Message("Ваша ставка победила");
-    $message->setTo([$winner_lots_val['email'] => $winner_lots_val['user_name']]);
-    $message->setBody($mail_content, 'text/html');
-    $message->setFrom("keks@phpdemo.ru", "Кекс");
+        $message = new Swift_Message("Ваша ставка победила");
+        $message->setTo([$winner_lots_val['email'] => $winner_lots_val['user_name']]);
+        $message->setBody($mail_content, 'text/html');
+        $message->setFrom("keks@phpdemo.ru", "Кекс");
 // Отправка сообщения
-    $mailer = new Swift_Mailer($transport);
-    $mailer->send($message);
-}
+        $mailer = new Swift_Mailer($transport);
+        $mailer->send($message);
+    }
 }
 
 

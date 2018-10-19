@@ -66,8 +66,7 @@ if (!empty($pag_lots_searching_array)) {
 
     $page_content = include_template('lots-by-category.php', ['lots' => $lots_searching_array, 'categories' => $categories_query_array, 'all_lots' => $pag_lots_searching_array,
         'pages_count' => $pages_count]);
-}
-else {
+} else {
     $page_content = include_template('category-fail.php', ['categories' => $categories_query_array]);
 }
 

@@ -2,7 +2,7 @@
     <ul class="nav__list container">
         <?php foreach ($categories as $key => $val): ?>
             <li class="nav__item">
-                <a href="lots-by-category.php?category_id=<?=$val['id']?>&page=1"><?= $val['name'] ?></a>
+                <a href="lots-by-category.php?category_id=<?= $val['id'] ?>&page=1"><?= $val['name'] ?></a>
             </li>
         <?php endforeach; ?>
     </ul>
@@ -31,7 +31,8 @@
         print('form__item--invalid');
     } ?>">
         <label for="name">Имя*</label>
-        <input id="name" type="text" name="name" placeholder="Введите имя" value='<?= $filled_field_array['name'] ?? '' ?>'
+        <input id="name" type="text" name="name" placeholder="Введите имя"
+               value='<?= $filled_field_array['name'] ?? '' ?>'
                required>
         <span class="form__error">Введите имя</span>
     </div>
@@ -40,7 +41,7 @@
     } ?>">
         <label for="message">Контактные данные*</label>
         <textarea id="message" name="message" placeholder="Напишите как с вами связаться"
-                  required><?= $filled_field_array['message'] ?? ''?></textarea>
+                  required><?= $filled_field_array['message'] ?? '' ?></textarea>
         <span class="form__error">Напишите как с вами связаться</span>
     </div>
     <div class="form__item form__item--file form__item--last">

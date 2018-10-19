@@ -2,7 +2,7 @@
     <ul class="nav__list container">
         <?php foreach ($categories as $key => $val): ?>
             <li class="nav__item">
-                <a href="lots-by-category.php?category_id=<?=$val['id']?>&page=1"><?= $val['name'] ?></a>
+                <a href="lots-by-category.php?category_id=<?= $val['id'] ?>&page=1"><?= $val['name'] ?></a>
             </li>
         <?php endforeach; ?>
     </ul>
@@ -71,17 +71,17 @@
                         <p class="lot-item__form-item">
                             <label for="cost">Ваша ставка</label>
                             <?php if (!$error_is_user_bet): ?><input id="cost" type="number" name="cost"
-                                   placeholder="<?php if (isset($lots_related[0]['last_bet_price'])) {
-                                       print (ruble_display($lots_related[0]['last_bet_price'] + $lot[0]['bet_step']));
-                                   } else {
-                                       print((ruble_display($lots_related[0]['start_price'] + $lot[0]['bet_step'])));
-                                   } ?>">
+                                                                     placeholder="<?php if (isset($lots_related[0]['last_bet_price'])) {
+                                                                         print (ruble_display($lots_related[0]['last_bet_price'] + $lot[0]['bet_step']));
+                                                                     } else {
+                                                                         print((ruble_display($lots_related[0]['start_price'] + $lot[0]['bet_step'])));
+                                                                     } ?>">
                             <?php endif; ?>
                             <?php if ($error_add_bet): ?><span>Введите корректную сумму</span><?php endif; ?>
                             <?php if ($error_is_user_bet): ?><span>Вы не можете сделать ставку</span><?php endif; ?>
                         </p>
                         <?php if (!$error_is_user_bet): ?>
-                        <button type="submit" class="button">Сделать ставку</button>
+                            <button type="submit" class="button">Сделать ставку</button>
                         <?php endif; ?>
                     </form>
                 <?php endif; ?>

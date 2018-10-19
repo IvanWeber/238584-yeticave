@@ -17,7 +17,7 @@ FROM bets
 JOIN lots ON bets.lot_id = lots.id
 JOIN users ON bets.user_id = users.id
 JOIN categories ON lots.category_id=categories.id
-WHERE bets.user_id = "'.$_SESSION['user']['id'].'"
+WHERE bets.user_id = "' . $_SESSION['user']['id'] . '"
 GROUP BY lots.id ORDER BY bets.date DESC;';
 
 $bets_result = mysqli_query($con, $bets_query);
@@ -31,11 +31,10 @@ if (!$bets_result) {
 $bets_query_array = mysqli_fetch_all($bets_result, MYSQLI_ASSOC);
 
 
-
 /*Вывод контактов продавца лота для победителя*/
 $give_contacts = false;
-foreach($bets_query_array as $key => $val) {
-    if(isset($val['winner_id'])) {
+foreach ($bets_query_array as $key => $val) {
+    if (isset($val['winner_id'])) {
         $give_contacts = true;
     }
 }
@@ -61,7 +60,7 @@ GROUP BY id';
 $owner_contacts_query_array = $owner_contacts_query_array ?? '';
 
 
-$page_content = include_template('my-bets.php', ['bets_query_array' => $bets_query_array,'categories' => $categories_query_array,
+$page_content = include_template('my-bets.php', ['bets_query_array' => $bets_query_array, 'categories' => $categories_query_array,
     'owner_contacts' => $owner_contacts_query_array]);
 $layout_content = include_template('layout.php', ['page_name' => $page_name, 'categories' => $categories_query_array,
     'page_content' => $page_content]);

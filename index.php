@@ -4,8 +4,8 @@ require_once('functions.php');
 require_once('data.php');
 require_once('getwinner.php');
 
-if (empty($_GET['page'])){
-    $_GET['page']=1;
+if (empty($_GET['page'])) {
+    $_GET['page'] = 1;
 }
 
 
@@ -75,8 +75,7 @@ if (!empty($pag_lots_searching_array)) {
 
     $page_content = include_template('index.php', ['lots' => $lots_searching_array, 'categories' => $categories_query_array,
         'all_lots' => $pag_lots_searching_array, 'pages_count' => $pages_count]);
-}
-else {
+} else {
     $page_content = include_template('index-fail.php', ['categories' => $categories_query_array]);
 }
 $layout_content = include_template('layout.php', ['page_content' => $page_content, 'categories' => $categories_query_array,

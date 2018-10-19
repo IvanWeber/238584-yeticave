@@ -1,8 +1,10 @@
 <nav class="nav">
     <ul class="nav__list container">
         <?php foreach ($categories as $key => $val): ?>
-            <li class="nav__item <?php if ($val['id']===$_GET['category_id']) {print(' nav__item--current');};?>">
-                <a href="lots-by-category.php?category_id=<?=$val['id']?>&page=1"><?= $val['name'] ?></a>
+            <li class="nav__item <?php if ($val['id'] === $_GET['category_id']) {
+                print(' nav__item--current');
+            }; ?>">
+                <a href="lots-by-category.php?category_id=<?= $val['id'] ?>&page=1"><?= $val['name'] ?></a>
             </li>
         <?php endforeach; ?>
     </ul>

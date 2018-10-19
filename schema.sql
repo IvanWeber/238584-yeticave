@@ -49,6 +49,6 @@ CREATE TABLE bets (
 );
 
 CREATE FULLTEXT INDEX lots_ft_search
-  ON lots(name, description)
+  ON lots (name, description)
 
 	
