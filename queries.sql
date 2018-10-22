@@ -1265,8 +1265,6 @@ VALUES (15, '2018-10-16 20:35:29', 12500, 5, 4);
 INSERT INTO `bets` (`id`, `date`, `price`, `user_id`, `lot_id`)
 VALUES (16, '2018-10-14 20:35:29', 21000, 5, 46);
 INSERT INTO `bets` (`id`, `date`, `price`, `user_id`, `lot_id`)
-VALUES (17, '2018-10-14 20:35:29', 21000, 5, 45);
-INSERT INTO `bets` (`id`, `date`, `price`, `user_id`, `lot_id`)
 VALUES (18, '2018-10-13 19:00:00', 20300, 5, 47);
 
 
