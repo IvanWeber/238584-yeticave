@@ -9,11 +9,11 @@ VALUES (1, 'Доски и лыжи'),
 INSERT INTO `users` (`id`, `registration_date`, `email`, `name`, `password`, `avatar`, `contacts`)
 VALUES (1,
         '2018-09-15 00:00:00',
-        'ivan@yandex.ru',
-        'Иван',
+        'Andrey@yandex.ru',
+        'Андрей',
         'ivanpass',
         NULL,
-        'Меня зовут Иван. Можете связаться со мной по телефону +7 777 777 77 77 в любое время');
+        'Меня зовут Андрей. Можете связаться со мной по телефону +7 777 777 77 77 в любое время');
 INSERT INTO `users` (`id`, `registration_date`, `email`, `name`, `password`, `avatar`, `contacts`)
 VALUES (2, '2018-08-19 00:00:00', 'konstsupercoolguy@yandex.ru', 'Константин', 'konstpass', NULL, NULL);
 INSERT INTO `users` (`id`, `registration_date`, `email`, `name`, `password`, `avatar`, `contacts`)
